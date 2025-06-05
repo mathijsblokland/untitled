@@ -1,13 +1,33 @@
-function kiesNummer () {
-    keuze = randint(1, 3)
-}
+let keuze = 0
 input.onGesture(Gesture.Shake, function () {
-    animatie()
-    laden()
-    toonIcoon()
-})
-function toonIcoon () {
-    kiesNummer()
+    keuze = randint(1, 3)
+    for (let index = 0; index < 2; index++) {
+        // Rock
+        basic.showLeds(`
+            . . # . .
+            . # # # .
+            # # # # #
+            . # # # .
+            . . # . .
+            `)
+        // Paper
+        basic.showLeds(`
+            . # # # .
+            . # # # .
+            . # # # .
+            . # # # .
+            . # # # .
+            `)
+        // Scissors
+        basic.showLeds(`
+            # . . . #
+            . # . # .
+            . . # . .
+            # # . # #
+            # # . # #
+            `)
+        basic.clearScreen()
+    }
     if (keuze == 1) {
         // Rock
         basic.showLeds(`
@@ -36,49 +56,10 @@ function toonIcoon () {
             # # . # #
             `)
     }
-}
-function laden () {
-    for (let index = 0; index < 2; index++) {
-        basic.pause(200)
-        // Rock
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . # . .
-            . . . . .
-            . . . . .
-            `)
-        basic.clearScreen()
-    }
-}
-function animatie () {
-    for (let index = 0; index < 2; index++) {
-        // Rock
-        basic.showLeds(`
-            . . # . .
-            . # # # .
-            # # # # #
-            . # # # .
-            . . # . .
-            `)
-        // Paper
-        basic.showLeds(`
-            . # # # .
-            . # # # .
-            . # # # .
-            . # # # .
-            . # # # .
-            `)
-        // Scissors
-        basic.showLeds(`
-            # . . . #
-            . # . # .
-            . . # . .
-            # # . # #
-            # # . # #
-            `)
-        basic.clearScreen()
-    }
-}
-let keuze = 0
-kiesNummer()
+})
+basic.forever(function () {
+	
+})
+basic.forever(function () {
+	
+})

@@ -1,915 +1,871 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #156227; -webkit-text-stroke: #156227}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #2e3133; -webkit-text-stroke: #2e3133; min-height: 15.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #a20010; -webkit-text-stroke: #a20010}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #ba0673; -webkit-text-stroke: #ba0673}
-    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #4d5055; -webkit-text-stroke: #4d5055}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #2e3133; -webkit-text-stroke: #000000}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #2e3133; -webkit-text-stroke: #2e3133}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #2e3133; -webkit-text-stroke: #a20010}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #2e3133; -webkit-text-stroke: #1443ae}
-    p.p10 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #1443ae; -webkit-text-stroke: #1443ae}
-    p.p11 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #2e3133; -webkit-text-stroke: #ba0673}
-    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #6103ad; -webkit-text-stroke: #6103ad}
-    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Menlo; color: #2e3133; -webkit-text-stroke: #6103ad}
-    span.s1 {font-kerning: none; background-color: #f6f7f9}
-    span.s2 {font-kerning: none}
-    span.s3 {font-kerning: none; color: #1443ae; background-color: #f6f7f9; -webkit-text-stroke: 0px #1443ae}
-    span.s4 {font-kerning: none; color: #2e3133; background-color: #f6f7f9; -webkit-text-stroke: 0px #2e3133}
-    span.s5 {font-kerning: none; color: #ba0673; background-color: #f6f7f9; -webkit-text-stroke: 0px #ba0673}
-    span.s6 {font-kerning: none; color: #a20010; background-color: #f6f7f9; -webkit-text-stroke: 0px #a20010}
-    span.s7 {font-kerning: none; color: #12737e; background-color: #f6f7f9; -webkit-text-stroke: 0px #12737e}
-    span.s8 {font-kerning: none; background-color: #f6f7f9; -webkit-text-stroke: 0px #2e3133}
-    span.s9 {font-kerning: none; color: #4d5055; background-color: #f6f7f9; -webkit-text-stroke: 0px #4d5055}
-    span.s10 {font-kerning: none; background-color: #f6f7f9; -webkit-text-stroke: 0px #000000}
-    span.s11 {font-kerning: none; color: #a20010; background-color: #f6f7f9}
-    span.s12 {font-kerning: none; color: #2e3133; background-color: #f6f7f9; -webkit-text-stroke: 0px #000000}
-    span.s13 {font-kerning: none; color: #1443ae; background-color: #f6f7f9}
-    span.s14 {font-kerning: none; color: #ba0673; background-color: #f6f7f9}
-    span.s15 {font-kerning: none; color: #6103ad; background-color: #f6f7f9; -webkit-text-stroke: 0px #6103ad}
-    span.s16 {font-kerning: none; color: #6103ad; background-color: #f6f7f9}
-  </style>
-</head>
-<body>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Techles Planning – Gmail Drafts + Calendar Sync</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* - Kolommen dynamisch via headers (met normalisatie; extra spaties in headers oké)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* - Drafts via Instellingen (D/E/F/G vanaf rij 3)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* - Calendar events: bron = 'Definitieve datum' (meerdere regels toegestaan)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* - Status wijziging =&gt; conceptmail maken (of vernieuwen als template verandert)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* - Status=Bevestiging =&gt; kalender sync (delete + recreate)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* - Wijziging Definitieve datum =&gt; alleen sync als Status al Bevestiging is</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* - Status=Reset =&gt; logging leeg + events verwijderen</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* CONFIG</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p3"><span class="s3">const</span><span class="s4"> </span><span class="s5">SHEET_MAIN</span><span class="s4"> = </span><span class="s1">"Aanvragen en Planning"</span><span class="s4">;</span></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">SHEET_SETTINGS</span><span class="s4"> = </span><span class="s6">"Instellingen"</span><span class="s4">;</span></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">SHEET_PROVIDERS</span><span class="s4"> = </span><span class="s6">"Aanbieders"</span><span class="s4">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">CALENDAR_ID</span><span class="s4"> =</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">"c_31bad5e42f4418281b5d51c7e989dc6ed337392554f095e1cc5ae5233b29b46a@group.calendar.google.com"</span><span class="s4">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s1">// Instellingen templates: D/E/F/G/H vanaf rij 3</span></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">SETTINGS_START_ROW</span><span class="s4"> = </span><span class="s7">3</span><span class="s4">;</span></p>
-<p class="p6"><span class="s3">const</span><span class="s8"> </span><span class="s5">SETTINGS_COL</span><span class="s8"> = { </span><span class="s1">key</span><span class="s8">: </span><span class="s7">4</span><span class="s8">, </span><span class="s1">subject</span><span class="s8">: </span><span class="s7">5</span><span class="s8">, </span><span class="s1">body</span><span class="s8">: </span><span class="s7">6</span><span class="s8">, </span><span class="s1">label</span><span class="s8">: </span><span class="s7">7</span><span class="s8">, </span><span class="s1">emailTarget</span><span class="s8">: </span><span class="s7">8</span><span class="s8"> }; </span><span class="s9">// D..H</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s1">// Instellingen Signature bevat bv. "me" of "info@..."</span></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">SETTINGS_SIGNATURE_SENDAS_CELL</span><span class="s4"> = </span><span class="s6">"B3"</span><span class="s4">;<span class="Apple-converted-space"> </span></span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s1">// Status -&gt; TemplateKey mapping (exact match met je dropdown)</span></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">STATUS_TO_TEMPLATE</span><span class="s4"> = {</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">"Contact gelegd"</span><span class="s4">: </span><span class="s1">"AFSTEMMING"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">"Optie"</span><span class="s4">: </span><span class="s1">"VOORSTEL"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">"Bevestiging"</span><span class="s4">: </span><span class="s1">"BEVESTIGING"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">"Akkoord"</span><span class="s4">: </span><span class="s1">"AKKOORD"</span><span class="s4">,</span></p>
-<p class="p7"><span class="s1">};</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s1">// Reset via status</span></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">ENABLE_RESET_STATUS</span><span class="s4"> = </span><span class="s3">true</span><span class="s4">;</span></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">RESET_STATUS_VALUE</span><span class="s4"> = </span><span class="s6">"Reset"</span><span class="s4">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s1">// Veiligheid: maak niet opnieuw een concept als er al een draftId staat</span></p>
-<p class="p5"><span class="s1">// (maar: als templateKey verandert, maken we wél een nieuwe draft)</span></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">DONT_DUPLICATE_IF_DRAFT_EXISTS</span><span class="s4"> = </span><span class="s3">true</span><span class="s4">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* ✅ Eén plek om je sheet-headers te beheren.</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Let op: jouw headers mogen extra spaties bevatten; we normaliseren.</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">COL_HEADERS</span><span class="s4"> = {</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s10">aanvraagId</span><span class="s8">: </span><span class="s11">'Aanvraag ID'</span><span class="s8">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">school</span><span class="s4">: </span><span class="s1">"Schoolnaam"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">contact</span><span class="s4">: </span><span class="s1">"Contactpersoon"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">email</span><span class="s4">: </span><span class="s1">"E-mailadres"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">gemeente</span><span class="s4">: </span><span class="s1">"Gemeente / Regio"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">groep</span><span class="s4">: </span><span class="s1">"Groep / leerjaar"</span><span class="s4">,</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s10">aantal_leerlingen</span><span class="s8">: </span><span class="s11">"Aantal leerlingen"</span><span class="s8">,</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">workshop</span><span class="s4">: </span><span class="s1">"Workshopnaam"</span><span class="s4">,</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s10">aanbieder</span><span class="s8">: </span><span class="s11">"Aanbieder"</span><span class="s8">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">aantal</span><span class="s4">: </span><span class="s1">"Lesmomenten"</span><span class="s4">,</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">datum</span><span class="s4">: </span><span class="s6">"Definitieve datum"</span><span class="s4">, </span><span class="s1">// bron voor kalender (mag meerdere regels bevatten)</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s10">locatie</span><span class="s8">: </span><span class="s11">"Locatie"</span><span class="s8">,</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">type</span><span class="s4">: </span><span class="s6">"Type"</span><span class="s4">, </span><span class="s1">// optioneel</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">totale_kosten</span><span class="s4">: </span><span class="s1">"Totale kosten aanbieder"</span><span class="s4">,</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s10">status</span><span class="s8">: </span><span class="s11">"Status"</span><span class="s8">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">lastContact</span><span class="s4">: </span><span class="s1">"Laatste contactdatum"</span><span class="s4">,</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s10">actieNodig</span><span class="s8">: </span><span class="s11">"Actie nodig"</span><span class="s8">, </span><span class="s9">// optioneel</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">conceptType</span><span class="s4">: </span><span class="s1">"Email Concept type"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">conceptMadeAt</span><span class="s4">: </span><span class="s1">"Email aangemaakt op"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">draftId</span><span class="s4">: </span><span class="s1">"Email Concept ID"</span><span class="s4">,</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s10">notes</span><span class="s8">: </span><span class="s11">"Notities"</span><span class="s8">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s12">debug</span><span class="s4">: </span><span class="s1">"Debug info"</span><span class="s4">,</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s10">calendarEventIds</span><span class="s8">: </span><span class="s11">"Calendar Event IDs"</span><span class="s8">,</span></p>
-<p class="p7"><span class="s1">};</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s1">// Welke keys mogen ontbreken zonder dat het script faalt?</span></p>
-<p class="p4"><span class="s3">const</span><span class="s4"> </span><span class="s1">OPTIONAL_COL_KEYS</span><span class="s4"> = </span><span class="s3">new</span><span class="s4"> </span><span class="s1">Set</span><span class="s4">([</span><span class="s6">"actieNodig"</span><span class="s4">, </span><span class="s6">"type"</span><span class="s4">]);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s1">// runtime map: key -&gt; colIndex</span></p>
-<p class="p7"><span class="s3">let</span><span class="s1"> </span><span class="s5">COL</span><span class="s1"> = {};</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* TRIGGER: onOpen (Add menu-item to authorize)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p9"><span class="s13">function</span><span class="s8"> </span><span class="s10">onOpen</span><span class="s8">() {</span></p>
-<p class="p4"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">SpreadsheetApp</span><span class="s4">.</span><span class="s12">getUi</span><span class="s4">()</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">    </span>.</span><span class="s10">createMenu</span><span class="s8">(</span><span class="s11">"Techles Admin"</span><span class="s8">)</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// .addItem("Authorize Gmail API", "AUTH_GMAILAPI")</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span>.</span><span class="s12">addItem</span><span class="s4">(</span><span class="s1">"Authorize GMAIL"</span><span class="s4">, </span><span class="s1">"authorizeGmail_"</span><span class="s4">)</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span>.</span><span class="s12">addItem</span><span class="s4">(</span><span class="s1">"Test Gmail signature (active row)"</span><span class="s4">, </span><span class="s1">"TEST_GMAILAPI_readSignatureForMe"</span><span class="s4">)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>.</span><span class="s10">addToUi</span><span class="s1">();</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p4"><span class="s3">function</span><span class="s4"> </span><span class="s1">AUTH_GMAILAPI</span><span class="s4">() {</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// minimale call die Gmail scope vereist -&gt; triggert autorisatie flow</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s5">Gmail</span><span class="s8">.</span><span class="s5">Users</span><span class="s8">.</span><span class="s1">getProfile</span><span class="s8">(</span><span class="s1">getSendAsIdFromSettings_</span><span class="s8">());</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s5">SpreadsheetApp</span><span class="s4">.</span><span class="s12">getUi</span><span class="s4">().</span><span class="s12">alert</span><span class="s4">(</span><span class="s1">"✅ Gmail API autorisatie lijkt gelukt. Je kunt nu de test runnen."</span><span class="s4">);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">authorizeGmail_</span><span class="s8">() {</span></p>
-<p class="p4"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s4"> </span><span class="s12">result</span><span class="s4"> = </span><span class="s1">Gmail</span><span class="s4">.</span><span class="s1">Users</span><span class="s4">.</span><span class="s1">Settings</span><span class="s4">.</span><span class="s1">SendAs</span><span class="s4">.</span><span class="s12">list</span><span class="s4">(</span><span class="s6">'me'</span><span class="s4">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">console</span><span class="s8">.</span><span class="s1">log</span><span class="s8">(</span><span class="s1">result</span><span class="s8">.</span><span class="s1">sendAs</span><span class="s8"> || []);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* TRIGGER: handleEdit (installable trigger aanbevolen)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Voeg deze ook toe bij Triggers (in de sidebar) met de waarde "head" en "on edit"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">handleEdit</span><span class="s8">(</span><span class="s1">e</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">sheet</span><span class="s8"> = </span><span class="s1">e</span><span class="s8">.</span><span class="s1">range</span><span class="s8">.</span><span class="s1">getSheet</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">sheet</span><span class="s1">.</span><span class="s10">getName</span><span class="s1">() !== </span><span class="s5">SHEET_MAIN</span><span class="s1">) </span><span class="s3">return</span><span class="s1">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">row</span><span class="s8"> = </span><span class="s1">e</span><span class="s8">.</span><span class="s1">range</span><span class="s8">.</span><span class="s1">getRow</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">row</span><span class="s1"> &lt; </span><span class="s7">2</span><span class="s1">) </span><span class="s3">return</span><span class="s1">; </span><span class="s9">// header</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">editedCol</span><span class="s8"> = </span><span class="s1">e</span><span class="s8">.</span><span class="s1">range</span><span class="s8">.</span><span class="s1">getColumn</span><span class="s8">();</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// ✅ Luister naar Definitieve datum, maar alleen als status al Bevestiging is</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">editedCol</span><span class="s8"> === </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">datum</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">statusNow</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">status</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">statusNow</span><span class="s1"> === </span><span class="s6">"Bevestiging"</span><span class="s1"> || </span><span class="s10">statusNow</span><span class="s1"> === </span><span class="s6">"Akkoord"</span><span class="s1">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s1">syncCalendarForRow_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">, </span><span class="s1">row</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Alleen reageren als Status is aangepast</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">editedCol</span><span class="s8"> !== </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">status</span><span class="s8">) </span><span class="s3">return</span><span class="s8">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">statusValue</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">e</span><span class="s8">.</span><span class="s1">range</span><span class="s8">.</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Reset via Status</span></p>
-<p class="p4"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s4"> (</span><span class="s1">ENABLE_RESET_STATUS</span><span class="s4"> &amp;&amp; </span><span class="s12">statusValue</span><span class="s4"> === </span><span class="s1">RESET_STATUS_VALUE</span><span class="s4">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s1">resetRow_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">, </span><span class="s1">row</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s1">e</span><span class="s8">.</span><span class="s1">range</span><span class="s8">.</span><span class="s1">setValue</span><span class="s8">(</span><span class="s6">""</span><span class="s8">);</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">templateKey</span><span class="s8"> = </span><span class="s5">STATUS_TO_TEMPLATE</span><span class="s8">[</span><span class="s1">statusValue</span><span class="s8">];</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (!</span><span class="s1">templateKey</span><span class="s8">) </span><span class="s3">return</span><span class="s8">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// ✅ Conceptmail aanmaken bij statuswijziging</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// - als er nog geen draftId is =&gt; maken</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// - als templateKey verschilt van conceptType =&gt; nieuwe draft maken</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// - als draft bestaat en templateKey gelijk is =&gt; overslaan (als DONT_DUPLICATE_IF_DRAFT_EXISTS = true)</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">existingDraftId</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">draftId</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">existingType</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">conceptType</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">shouldCreateDraft</span><span class="s8"> =</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span>!</span><span class="s1">existingDraftId</span><span class="s8"> || </span><span class="s1">existingType</span><span class="s8"> !== </span><span class="s1">templateKey</span><span class="s8"> || !</span><span class="s5">DONT_DUPLICATE_IF_DRAFT_EXISTS</span><span class="s8">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">shouldCreateDraft</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s1">createDraftFromSheetTemplate_</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s1">templateKey</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// ✅ Kalender bij bevestiging: altijd syncen</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s10">templateKey</span><span class="s8"> === </span><span class="s11">"BEVESTIGING"</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s1">syncCalendarForRow_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">, </span><span class="s1">row</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Gmail: Draft + logging + label</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">createDraftFromSheetTemplate_</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s1">templateKey</span><span class="s8">) {</span></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">ss</span><span class="s8"> = </span><span class="s14">SpreadsheetApp</span><span class="s8">.</span><span class="s10">getActive</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">main</span><span class="s8"> = </span><span class="s1">ss</span><span class="s8">.</span><span class="s1">getSheetByName</span><span class="s8">(</span><span class="s5">SHEET_MAIN</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">settings</span><span class="s8"> = </span><span class="s1">ss</span><span class="s8">.</span><span class="s1">getSheetByName</span><span class="s8">(</span><span class="s5">SHEET_SETTINGS</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">email</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">email</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">email</span><span class="s1">) {</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s12">debug_</span><span class="s4">(</span><span class="s12">main</span><span class="s4">, </span><span class="s12">row</span><span class="s4">, </span><span class="s1">"Geen conceptmail gemaakt: E-mailadres is leeg."</span><span class="s4">);</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">  </span></span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">providerName</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">aanbieder</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">()</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">provider</span><span class="s8"> = </span><span class="s1">getProviderInfoByName_</span><span class="s8">(</span><span class="s1">providerName</span><span class="s8">) || {};</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">providerName</span><span class="s8"> &amp;&amp; !</span><span class="s1">provider</span><span class="s8">.</span><span class="s1">name</span><span class="s8">) {</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s10">debug_</span><span class="s8">(</span><span class="s10">main</span><span class="s8">, </span><span class="s10">row</span><span class="s8">, </span><span class="s11">"Aanbieder niet gevonden in '"</span><span class="s8"> + </span><span class="s5">SHEET_PROVIDERS</span><span class="s8"> + </span><span class="s11">"': "</span><span class="s8"> + </span><span class="s10">providerName</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">totaleKosten</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">totale_kosten</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">tpl</span><span class="s8"> = </span><span class="s1">getTemplateByKey_</span><span class="s8">(</span><span class="s1">settings</span><span class="s8">, </span><span class="s1">templateKey</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">tpl</span><span class="s1">) {</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">throw</span><span class="s4"> </span><span class="s1">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">      </span></span><span class="s1">"TemplateKey '"</span><span class="s4"> +</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">        </span></span><span class="s1">templateKey</span><span class="s8"> +</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">"' niet gevonden in '"</span><span class="s4"> +</span></p>
-<p class="p4"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">SHEET_SETTINGS</span><span class="s4"> +</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">"' (kolom D, vanaf rij "</span><span class="s4"> +</span></p>
-<p class="p4"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">SETTINGS_START_ROW</span><span class="s4"> +</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s6">")."</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">data</span><span class="s1"> = {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{AANVRAAG_ID}}"</span><span class="s8">: </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">aanvraagId</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{SCHOOL}}"</span><span class="s8">: </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">school</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{NAAM}}"</span><span class="s8">: </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">contact</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">),</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s6">"{{EMAIL}}"</span><span class="s1">: </span><span class="s5">String</span><span class="s1">(</span><span class="s10">email</span><span class="s1"> || </span><span class="s6">""</span><span class="s1">),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{GEMEENTE}}"</span><span class="s8">: </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">gemeente</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{WORKSHOP}}"</span><span class="s8">: </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">workshop</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">),</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s11">"{{AANBIEDER}}"</span><span class="s8">: </span><span class="s10">providerName</span><span class="s8">,</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s11">"{{AANBIEDER_CONTACT}}"</span><span class="s8">: </span><span class="s10">provider</span><span class="s8">.</span><span class="s10">contact</span><span class="s8"> || </span><span class="s11">""</span><span class="s8">,</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s11">"{{AANBIEDER_EMAIL}}"</span><span class="s8">: </span><span class="s10">provider</span><span class="s8">.</span><span class="s10">email</span><span class="s8"> || </span><span class="s11">""</span><span class="s8">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">"{{AANBIEDER_TELEFOON}}"</span><span class="s4">: </span><span class="s12">provider</span><span class="s4">.</span><span class="s12">phone</span><span class="s4"> || </span><span class="s1">""</span><span class="s4">,</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{GROEP}}"</span><span class="s8">: </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">groep</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{AANTAL_LEERLINGEN}}"</span><span class="s8">: </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">aantal_leerlingen</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{AANTAL}}"</span><span class="s8">: </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">aantal</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{DATUM}}"</span><span class="s8">: </span><span class="s1">formatDate_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">datum</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">()),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{PRETTY_DATUM}}"</span><span class="s8">: </span><span class="s1">formatWorkshopDatesGrouped_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">datum</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">()),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{LOCATIE}}"</span><span class="s8">: </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">locatie</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s6">"{{TOTALE_KOSTEN}}"</span><span class="s8">: </span><span class="s1">formatNumberNl_</span><span class="s8">(</span><span class="s1">totaleKosten</span><span class="s8">),</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>};</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">subject</span><span class="s8"> = </span><span class="s1">replaceAll_</span><span class="s8">(</span><span class="s1">tpl</span><span class="s8">.</span><span class="s1">subject</span><span class="s8">, </span><span class="s1">data</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">bodyText</span><span class="s8"> = </span><span class="s1">replaceAll_</span><span class="s8">(</span><span class="s1">tpl</span><span class="s8">.</span><span class="s1">body</span><span class="s8">, </span><span class="s1">data</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">let</span><span class="s8"> </span><span class="s1">bodyHtml</span><span class="s8"> = </span><span class="s1">textToHtml_</span><span class="s8">(</span><span class="s1">bodyText</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Signature ophalen</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">sigHtml</span><span class="s8"> = </span><span class="s1">getGmailSignatureHtmlFromSettings_</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">bodyHtml</span><span class="s8"> = </span><span class="s1">appendSignatureHtml_</span><span class="s8">(</span><span class="s1">bodyHtml</span><span class="s8">, </span><span class="s1">sigHtml</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Target email</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">emailTarget</span><span class="s8"> =</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s1">tpl</span><span class="s8">.</span><span class="s1">emailTarget</span><span class="s8"> === </span><span class="s6">"School"</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span>? </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">email</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">()</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span>: </span><span class="s10">tpl</span><span class="s1">.</span><span class="s10">emailTarget</span><span class="s1"> === </span><span class="s6">"Aanbieder"</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span>? </span><span class="s5">String</span><span class="s1">(</span><span class="s10">provider</span><span class="s1">.</span><span class="s10">email</span><span class="s1"> || </span><span class="s6">""</span><span class="s1">).</span><span class="s10">trim</span><span class="s1">()</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span>: </span><span class="s6">""</span><span class="s1">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">draft</span><span class="s8"> = </span><span class="s5">GmailApp</span><span class="s8">.</span><span class="s1">createDraft</span><span class="s8">(</span><span class="s1">emailTarget</span><span class="s8">, </span><span class="s1">subject</span><span class="s8">, </span><span class="s1">bodyText</span><span class="s8">, { </span><span class="s1">htmlBody</span><span class="s8">: </span><span class="s1">bodyHtml</span><span class="s8"> });</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// ✅ Loggen</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">now</span><span class="s1"> = </span><span class="s3">new</span><span class="s1"> </span><span class="s5">Date</span><span class="s1">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">conceptType</span><span class="s8">).</span><span class="s1">setValue</span><span class="s8">(</span><span class="s1">templateKey</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">conceptMadeAt</span><span class="s8">).</span><span class="s1">setValue</span><span class="s8">(</span><span class="s1">now</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">draftId</span><span class="s8">).</span><span class="s1">setValue</span><span class="s8">(</span><span class="s1">draft</span><span class="s8">.</span><span class="s1">getId</span><span class="s8">());</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">lastContact</span><span class="s8">).</span><span class="s1">setValue</span><span class="s8">(</span><span class="s1">now</span><span class="s8">);</span></p>
-<p class="p4"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">SpreadsheetApp</span><span class="s4">.</span><span class="s12">flush</span><span class="s4">();</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// 🏷️ Labelen (op thread)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">try</span><span class="s1"> {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">tpl</span><span class="s1">.</span><span class="s10">label</span><span class="s1">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">label</span><span class="s8"> = </span><span class="s1">getOrCreateLabel_</span><span class="s8">(</span><span class="s1">tpl</span><span class="s8">.</span><span class="s1">label</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s1">draft</span><span class="s8">.</span><span class="s1">getMessage</span><span class="s8">().</span><span class="s1">getThread</span><span class="s8">().</span><span class="s1">addLabel</span><span class="s8">(</span><span class="s1">label</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>} </span><span class="s3">catch</span><span class="s1"> (</span><span class="s10">err</span><span class="s1">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s1">debug_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">, </span><span class="s1">row</span><span class="s8">, </span><span class="s6">"Label-fout: "</span><span class="s8"> + (</span><span class="s1">err</span><span class="s8"> &amp;&amp; </span><span class="s1">err</span><span class="s8">.</span><span class="s1">message</span><span class="s8"> ? </span><span class="s1">err</span><span class="s8">.</span><span class="s1">message</span><span class="s8"> : </span><span class="s1">err</span><span class="s8">));</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Calendar helpers: sync + delete</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">syncCalendarForRow_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">, </span><span class="s1">row</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">deleteCalendarEventsForRow_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">, </span><span class="s1">row</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">calendarEventIds</span><span class="s8">).</span><span class="s1">clearContent</span><span class="s8">();</span></p>
-<p class="p4"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">SpreadsheetApp</span><span class="s4">.</span><span class="s12">flush</span><span class="s4">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">createCalendarEventsForRow_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">, </span><span class="s1">row</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">deleteCalendarEventsForRow_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">, </span><span class="s1">row</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">idsRaw</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">calendarEventIds</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">idsRaw</span><span class="s1">) </span><span class="s3">return</span><span class="s1">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">calendar</span><span class="s8"> = </span><span class="s5">CalendarApp</span><span class="s8">.</span><span class="s1">getCalendarById</span><span class="s8">(</span><span class="s5">CALENDAR_ID</span><span class="s8">);</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s4"> (!</span><span class="s12">calendar</span><span class="s4">) </span><span class="s3">throw</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span><span class="s1">"Calendar niet gevonden. Check CALENDAR_ID."</span><span class="s4">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">ids</span><span class="s8"> = </span><span class="s1">idsRaw</span><span class="s8">.</span><span class="s1">split</span><span class="s8">(</span><span class="s6">","</span><span class="s8">).</span><span class="s1">map</span><span class="s8">((</span><span class="s1">s</span><span class="s8">) =&gt; </span><span class="s1">s</span><span class="s8">.</span><span class="s1">trim</span><span class="s8">()).</span><span class="s1">filter</span><span class="s8">(</span><span class="s5">Boolean</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">for</span><span class="s1"> (</span><span class="s3">const</span><span class="s1"> </span><span class="s10">id</span><span class="s1"> </span><span class="s3">of</span><span class="s1"> </span><span class="s10">ids</span><span class="s1">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">try</span><span class="s1"> {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">ev</span><span class="s8"> = </span><span class="s1">calendar</span><span class="s8">.</span><span class="s1">getEventById</span><span class="s8">(</span><span class="s1">id</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">ev</span><span class="s8">) </span><span class="s1">ev</span><span class="s8">.</span><span class="s1">deleteEvent</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>} </span><span class="s3">catch</span><span class="s1"> (</span><span class="s10">err</span><span class="s1">) {</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s10">debug_</span><span class="s8">(</span><span class="s10">main</span><span class="s8">, </span><span class="s10">row</span><span class="s8">, </span><span class="s11">"Calendar-delete waarschuwing (eventId "</span><span class="s8"> + </span><span class="s10">id</span><span class="s8"> + </span><span class="s11">"): "</span><span class="s8"> + (</span><span class="s10">err</span><span class="s8"> &amp;&amp; </span><span class="s10">err</span><span class="s8">.</span><span class="s10">message</span><span class="s8"> ? </span><span class="s10">err</span><span class="s8">.</span><span class="s10">message</span><span class="s8"> : </span><span class="s10">err</span><span class="s8">));</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Calendar: events maken vanuit Definitieve datum</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Formaat per regel in cel 'Definitieve datum':</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* dd-mm-jjjj HH:MM-HH:MM</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">createCalendarEventsForRow_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">, </span><span class="s1">row</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// (optioneel) start clean</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">clearDebug_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">, </span><span class="s1">row</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Voorkom dubbel aanmaken</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">existing</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">calendarEventIds</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">existing</span><span class="s8">) </span><span class="s3">return</span><span class="s8">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">calendar</span><span class="s8"> = </span><span class="s5">CalendarApp</span><span class="s8">.</span><span class="s1">getCalendarById</span><span class="s8">(</span><span class="s5">CALENDAR_ID</span><span class="s8">);</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s4"> (!</span><span class="s12">calendar</span><span class="s4">) </span><span class="s3">throw</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span><span class="s1">"Calendar niet gevonden. Check CALENDAR_ID."</span><span class="s4">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">providerName</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">aanbieder</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">()</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">provider</span><span class="s8"> = </span><span class="s1">getProviderInfoByName_</span><span class="s8">(</span><span class="s1">providerName</span><span class="s8">) || {};</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">providerName</span><span class="s8"> &amp;&amp; !</span><span class="s1">provider</span><span class="s8">.</span><span class="s1">name</span><span class="s8">) {</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s10">debug_</span><span class="s8">(</span><span class="s10">main</span><span class="s8">, </span><span class="s10">row</span><span class="s8">, </span><span class="s11">"Aanbieder niet gevonden in '"</span><span class="s8"> + </span><span class="s5">SHEET_PROVIDERS</span><span class="s8"> + </span><span class="s11">"': "</span><span class="s8"> + </span><span class="s10">providerName</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">school</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">school</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">aantal_leerlingen</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">aantal_leerlingen</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">groep</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">groep</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">workshop</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">workshop</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">locatie</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">locatie</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">type</span><span class="s8"> = </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">type</span><span class="s8"> ? </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">type</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">) : </span><span class="s6">""</span><span class="s8">;</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">contact</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">contact</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">email</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">email</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">momentsRaw</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">datum</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (!</span><span class="s1">momentsRaw</span><span class="s8">) {</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s12">debug_</span><span class="s4">(</span><span class="s12">main</span><span class="s4">, </span><span class="s12">row</span><span class="s4">, </span><span class="s1">"Geen kalender-event gemaakt: 'Definitieve datum' is leeg."</span><span class="s4">);</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">lines</span><span class="s8"> = </span><span class="s1">momentsRaw</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>.</span><span class="s10">replace</span><span class="s1">(</span><span class="s15">/\r\n/</span><span class="s3">g</span><span class="s1">, </span><span class="s6">"\n"</span><span class="s1">)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>.</span><span class="s10">replace</span><span class="s1">(</span><span class="s15">/\r/</span><span class="s3">g</span><span class="s1">, </span><span class="s6">"\n"</span><span class="s1">)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>.</span><span class="s10">split</span><span class="s1">(</span><span class="s15">/\n+/</span><span class="s1">)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>.</span><span class="s10">map</span><span class="s1">((</span><span class="s10">s</span><span class="s1">) =&gt; </span><span class="s10">s</span><span class="s1">.</span><span class="s10">trim</span><span class="s1">())</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>.</span><span class="s10">filter</span><span class="s1">(</span><span class="s5">Boolean</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">createdIds</span><span class="s8"> = [];</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">for</span><span class="s1"> (</span><span class="s3">const</span><span class="s1"> </span><span class="s10">line</span><span class="s1"> </span><span class="s3">of</span><span class="s1"> </span><span class="s10">lines</span><span class="s1">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">m</span><span class="s1"> = </span><span class="s10">line</span><span class="s1">.</span><span class="s10">match</span><span class="s1">(</span></p>
-<p class="p12"><span class="s4"><span class="Apple-converted-space">      </span></span><span class="s1">/^(\d{1,2})-(\d{1,2})-(\d{4})\s+(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">m</span><span class="s1">) {</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">      </span></span><span class="s12">debug_</span><span class="s4">(</span><span class="s12">main</span><span class="s4">, </span><span class="s12">row</span><span class="s4">, </span><span class="s1">'Ongeldig formaat in Definitieve datum: "'</span><span class="s4"> + </span><span class="s12">line</span><span class="s4"> + </span><span class="s1">'" (gebruik dd-mm-jjjj HH:MM-HH:MM)'</span><span class="s4">);</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">      </span></span><span class="s1">continue</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">day</span><span class="s1"> = </span><span class="s10">parseInt</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">1</span><span class="s1">], </span><span class="s7">10</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">month</span><span class="s1"> = </span><span class="s10">parseInt</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">2</span><span class="s1">], </span><span class="s7">10</span><span class="s1">) - </span><span class="s7">1</span><span class="s1">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">year</span><span class="s1"> = </span><span class="s10">parseInt</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">3</span><span class="s1">], </span><span class="s7">10</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">sh</span><span class="s1"> = </span><span class="s10">parseInt</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">4</span><span class="s1">], </span><span class="s7">10</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">sm</span><span class="s1"> = </span><span class="s10">parseInt</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">5</span><span class="s1">], </span><span class="s7">10</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">eh</span><span class="s1"> = </span><span class="s10">parseInt</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">6</span><span class="s1">], </span><span class="s7">10</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">em</span><span class="s1"> = </span><span class="s10">parseInt</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">7</span><span class="s1">], </span><span class="s7">10</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">start</span><span class="s1"> = </span><span class="s3">new</span><span class="s1"> </span><span class="s5">Date</span><span class="s1">(</span><span class="s10">year</span><span class="s1">, </span><span class="s10">month</span><span class="s1">, </span><span class="s10">day</span><span class="s1">, </span><span class="s10">sh</span><span class="s1">, </span><span class="s10">sm</span><span class="s1">, </span><span class="s7">0</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">end</span><span class="s1"> = </span><span class="s3">new</span><span class="s1"> </span><span class="s5">Date</span><span class="s1">(</span><span class="s10">year</span><span class="s1">, </span><span class="s10">month</span><span class="s1">, </span><span class="s10">day</span><span class="s1">, </span><span class="s10">eh</span><span class="s1">, </span><span class="s10">em</span><span class="s1">, </span><span class="s7">0</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// ✅ Type toegevoegd</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">title</span><span class="s1"> = </span><span class="s6">"Workshop: "</span><span class="s1"> + </span><span class="s10">workshop</span><span class="s1"> + </span><span class="s6">" — "</span><span class="s1"> + </span><span class="s10">school</span><span class="s1"> + (</span><span class="s10">type</span><span class="s1"> ? </span><span class="s6">" ["</span><span class="s1"> + </span><span class="s10">type</span><span class="s1"> + </span><span class="s6">"]"</span><span class="s1"> : </span><span class="s6">""</span><span class="s1">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">description</span><span class="s8"> =</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s11">"Aanbieder: "</span><span class="s8"> + </span><span class="s10">providerName</span><span class="s8"> + </span><span class="s11">"\n"</span><span class="s8"> +</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span>(</span><span class="s1">provider</span><span class="s8">.</span><span class="s1">email</span><span class="s8"> ? </span><span class="s6">`Aanbieder email: </span><span class="s8">${</span><span class="s1">provider</span><span class="s8">.</span><span class="s1">email</span><span class="s8">}</span><span class="s6">\n`</span><span class="s8"> : </span><span class="s6">""</span><span class="s8">) +</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s11">"Contact school: "</span><span class="s8"> + </span><span class="s10">contact</span><span class="s8"> + </span><span class="s11">" ("</span><span class="s8"> + </span><span class="s10">email</span><span class="s8"> + </span><span class="s11">")\n"</span><span class="s8"> +</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s11">"Groep: "</span><span class="s8"> + </span><span class="s10">groep</span><span class="s8"> + </span><span class="s11">" - "</span><span class="s8"> + </span><span class="s10">aantal_leerlingen</span><span class="s8"> + </span><span class="s11">" leerlingen\n"</span><span class="s8"> +</span></p>
-<p class="p8"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s11">"Locatie: "</span><span class="s8"> + </span><span class="s10">locatie</span><span class="s8"> + </span><span class="s11">"\n"</span><span class="s8"> +</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span>(</span><span class="s10">type</span><span class="s1"> ? </span><span class="s6">"Type: "</span><span class="s1"> + </span><span class="s10">type</span><span class="s1"> + </span><span class="s6">"\n"</span><span class="s1"> : </span><span class="s6">""</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">event</span><span class="s8"> = </span><span class="s1">calendar</span><span class="s8">.</span><span class="s1">createEvent</span><span class="s8">(</span><span class="s1">title</span><span class="s8">, </span><span class="s1">start</span><span class="s8">, </span><span class="s1">end</span><span class="s8">, {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s1">location</span><span class="s8">: </span><span class="s1">locatie</span><span class="s8">,</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s1">description</span><span class="s8">: </span><span class="s1">description</span><span class="s8">,</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>});</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s1">createdIds</span><span class="s8">.</span><span class="s1">push</span><span class="s8">(</span><span class="s1">event</span><span class="s8">.</span><span class="s1">getId</span><span class="s8">());</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (!</span><span class="s1">createdIds</span><span class="s8">.</span><span class="s1">length</span><span class="s8">) {</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s12">debug_</span><span class="s4">(</span><span class="s12">main</span><span class="s4">, </span><span class="s12">row</span><span class="s4">, </span><span class="s1">"Geen kalender-event gemaakt: geen geldige regels in 'Definitieve datum'."</span><span class="s4">);</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">calendarEventIds</span><span class="s8">).</span><span class="s1">setValue</span><span class="s8">(</span><span class="s1">createdIds</span><span class="s8">.</span><span class="s1">join</span><span class="s8">(</span><span class="s6">","</span><span class="s8">));</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Signature helper</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">getSendAsIdFromSettings_</span><span class="s8">() {</span></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">ss</span><span class="s8"> = </span><span class="s14">SpreadsheetApp</span><span class="s8">.</span><span class="s10">getActive</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">settings</span><span class="s8"> = </span><span class="s1">ss</span><span class="s8">.</span><span class="s1">getSheetByName</span><span class="s8">(</span><span class="s5">SHEET_SETTINGS</span><span class="s8">);</span></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">v</span><span class="s8"> = </span><span class="s14">String</span><span class="s8">(</span><span class="s10">settings</span><span class="s8">.</span><span class="s10">getRange</span><span class="s8">(</span><span class="s14">SETTINGS_SIGNATURE_SENDAS_CELL</span><span class="s8">).</span><span class="s10">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s10">trim</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">return</span><span class="s1"> </span><span class="s10">v</span><span class="s1"> || </span><span class="s6">"me"</span><span class="s1">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">getGmailSignatureHtmlFromSettings_</span><span class="s8">() {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">userId</span><span class="s1"> = </span><span class="s6">"me"</span><span class="s1">;</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">desired</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">getSendAsIdFromSettings_</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">(); </span><span class="s9">// liefst emailadres</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">list</span><span class="s8"> = </span><span class="s14">Gmail</span><span class="s8">.</span><span class="s14">Users</span><span class="s8">.</span><span class="s14">Settings</span><span class="s8">.</span><span class="s14">SendAs</span><span class="s8">.</span><span class="s10">list</span><span class="s8">(</span><span class="s10">userId</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">items</span><span class="s8"> = (</span><span class="s1">list</span><span class="s8"> &amp;&amp; </span><span class="s1">list</span><span class="s8">.</span><span class="s1">sendAs</span><span class="s8">) ? </span><span class="s1">list</span><span class="s8">.</span><span class="s1">sendAs</span><span class="s8"> : [];</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// 1) als B3 matcht met een bestaande sendAsEmail -&gt; gebruik die</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">let</span><span class="s8"> </span><span class="s1">chosen</span><span class="s8"> = </span><span class="s1">items</span><span class="s8">.</span><span class="s1">find</span><span class="s8">(</span><span class="s1">x</span><span class="s8"> =&gt; </span><span class="s1">x</span><span class="s8">.</span><span class="s1">sendAsEmail</span><span class="s8"> === </span><span class="s1">desired</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// 2) als B3 leeg of "me" of geen match -&gt; pak de primary</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (!</span><span class="s1">chosen</span><span class="s8">) </span><span class="s1">chosen</span><span class="s8"> = </span><span class="s1">items</span><span class="s8">.</span><span class="s1">find</span><span class="s8">(</span><span class="s1">x</span><span class="s8"> =&gt; </span><span class="s1">x</span><span class="s8">.</span><span class="s1">isPrimary</span><span class="s8">) || </span><span class="s1">items</span><span class="s8">[</span><span class="s7">0</span><span class="s8">];</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">return</span><span class="s8"> (</span><span class="s1">chosen</span><span class="s8"> &amp;&amp; </span><span class="s1">chosen</span><span class="s8">.</span><span class="s1">signature</span><span class="s8">) ? </span><span class="s5">String</span><span class="s8">(</span><span class="s1">chosen</span><span class="s8">.</span><span class="s1">signature</span><span class="s8">) : </span><span class="s6">""</span><span class="s8">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">appendSignatureHtml_</span><span class="s8">(</span><span class="s1">htmlBody</span><span class="s8">, </span><span class="s1">signatureHtml</span><span class="s8">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">body</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">htmlBody</span><span class="s1"> || </span><span class="s6">""</span><span class="s1">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">sig</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">signatureHtml</span><span class="s8"> || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">sig</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s10">body</span><span class="s1">;</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">body</span><span class="s8">.</span><span class="s1">includes</span><span class="s8">(</span><span class="s1">sig</span><span class="s8">)) </span><span class="s3">return</span><span class="s8"> </span><span class="s1">body</span><span class="s8">; </span><span class="s9">// voorkom dubbel</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">return</span><span class="s1"> </span><span class="s10">body</span><span class="s1"> + </span><span class="s6">"\n&lt;br&gt;\n"</span><span class="s1"> + </span><span class="s10">sig</span><span class="s1">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Reset helper</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">resetRow_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">, </span><span class="s1">row</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Events uit kalender verwijderen</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">deleteCalendarEventsForRow_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">, </span><span class="s1">row</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">conceptType</span><span class="s8">).</span><span class="s1">clearContent</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">conceptMadeAt</span><span class="s8">).</span><span class="s1">clearContent</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">draftId</span><span class="s8">).</span><span class="s1">clearContent</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">lastContact</span><span class="s8">).</span><span class="s1">clearContent</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">calendarEventIds</span><span class="s8">).</span><span class="s1">clearContent</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Templates from Instellingen (D/E/F/G/H)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">getTemplateByKey_</span><span class="s8">(</span><span class="s1">settingsSheet</span><span class="s8">, </span><span class="s1">templateKey</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">lastRow</span><span class="s8"> = </span><span class="s1">settingsSheet</span><span class="s8">.</span><span class="s1">getLastRow</span><span class="s8">();</span></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s10">lastRow</span><span class="s8"> &lt; </span><span class="s14">SETTINGS_START_ROW</span><span class="s8">) </span><span class="s3">return</span><span class="s8"> </span><span class="s3">null</span><span class="s8">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">numRows</span><span class="s8"> = </span><span class="s10">lastRow</span><span class="s8"> - </span><span class="s14">SETTINGS_START_ROW</span><span class="s8"> + </span><span class="s7">1</span><span class="s8">;</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">values</span><span class="s8"> = </span><span class="s1">settingsSheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s5">SETTINGS_START_ROW</span><span class="s8">, </span><span class="s5">SETTINGS_COL</span><span class="s8">.</span><span class="s1">key</span><span class="s8">, </span><span class="s1">numRows</span><span class="s8">, </span><span class="s7">5</span><span class="s8">).</span><span class="s1">getValues</span><span class="s8">();</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">for</span><span class="s1"> (</span><span class="s3">const</span><span class="s1"> </span><span class="s10">r</span><span class="s1"> </span><span class="s3">of</span><span class="s1"> </span><span class="s10">values</span><span class="s1">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">key</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">r</span><span class="s1">[</span><span class="s7">0</span><span class="s1">] || </span><span class="s6">""</span><span class="s1">).</span><span class="s10">trim</span><span class="s1">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">key</span><span class="s1"> === </span><span class="s10">templateKey</span><span class="s1">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">return</span><span class="s1"> {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">subject</span><span class="s1">: </span><span class="s5">String</span><span class="s1">(</span><span class="s10">r</span><span class="s1">[</span><span class="s7">1</span><span class="s1">] || </span><span class="s6">""</span><span class="s1">),</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">body</span><span class="s1">: </span><span class="s5">String</span><span class="s1">(</span><span class="s10">r</span><span class="s1">[</span><span class="s7">2</span><span class="s1">] || </span><span class="s6">""</span><span class="s1">),</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">label</span><span class="s1">: </span><span class="s5">String</span><span class="s1">(</span><span class="s10">r</span><span class="s1">[</span><span class="s7">3</span><span class="s1">] || </span><span class="s6">""</span><span class="s1">).</span><span class="s10">trim</span><span class="s1">(),</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">emailTarget</span><span class="s1">: </span><span class="s5">String</span><span class="s1">(</span><span class="s10">r</span><span class="s1">[</span><span class="s7">4</span><span class="s1">] || </span><span class="s6">""</span><span class="s1">).</span><span class="s10">trim</span><span class="s1">(),</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span>};</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">return</span><span class="s4"> </span><span class="s1">null</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Column sync (headers -&gt; COL indices)</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">normalizeHeader_</span><span class="s8">(</span><span class="s1">h</span><span class="s8">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">return</span><span class="s1"> </span><span class="s5">String</span><span class="s1">(</span><span class="s10">h</span><span class="s1"> || </span><span class="s6">""</span><span class="s1">)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>.</span><span class="s10">replace</span><span class="s1">(</span><span class="s15">/\s+/</span><span class="s3">g</span><span class="s1">, </span><span class="s6">" "</span><span class="s1">)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>.</span><span class="s10">trim</span><span class="s1">()</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span>.</span><span class="s1">toLowerCase</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">lastCol</span><span class="s8"> = </span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getLastColumn</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">rawHeaders</span><span class="s8"> = </span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s7">1</span><span class="s8">, </span><span class="s7">1</span><span class="s8">, </span><span class="s7">1</span><span class="s8">, </span><span class="s1">lastCol</span><span class="s8">).</span><span class="s1">getValues</span><span class="s8">()[</span><span class="s7">0</span><span class="s8">];</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">headerToIndex</span><span class="s8"> = {};</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">rawHeaders</span><span class="s8">.</span><span class="s1">forEach</span><span class="s8">((</span><span class="s1">h</span><span class="s8">, </span><span class="s1">i</span><span class="s8">) =&gt; {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">norm</span><span class="s8"> = </span><span class="s1">normalizeHeader_</span><span class="s8">(</span><span class="s1">h</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">norm</span><span class="s8"> &amp;&amp; !</span><span class="s1">headerToIndex</span><span class="s8">[</span><span class="s1">norm</span><span class="s8">]) </span><span class="s1">headerToIndex</span><span class="s8">[</span><span class="s1">norm</span><span class="s8">] = </span><span class="s1">i</span><span class="s8"> + </span><span class="s7">1</span><span class="s8">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">missing</span><span class="s1"> = [];</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">map</span><span class="s1"> = {};</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">for</span><span class="s8"> (</span><span class="s3">const</span><span class="s8"> </span><span class="s10">key</span><span class="s8"> </span><span class="s3">in</span><span class="s8"> </span><span class="s14">COL_HEADERS</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">expectedNorm</span><span class="s8"> = </span><span class="s1">normalizeHeader_</span><span class="s8">(</span><span class="s5">COL_HEADERS</span><span class="s8">[</span><span class="s1">key</span><span class="s8">]);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">idx</span><span class="s8"> = </span><span class="s1">headerToIndex</span><span class="s8">[</span><span class="s1">expectedNorm</span><span class="s8">];</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">idx</span><span class="s1">) {</span></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s3">if</span><span class="s8"> (!</span><span class="s14">OPTIONAL_COL_KEYS</span><span class="s8">.</span><span class="s10">has</span><span class="s8">(</span><span class="s10">key</span><span class="s8">)) </span><span class="s10">missing</span><span class="s8">.</span><span class="s10">push</span><span class="s8">(</span><span class="s14">COL_HEADERS</span><span class="s8">[</span><span class="s10">key</span><span class="s8">]);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s10">map</span><span class="s1">[</span><span class="s10">key</span><span class="s1">] = </span><span class="s3">null</span><span class="s1">;</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">      </span></span><span class="s1">continue</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s10">map</span><span class="s1">[</span><span class="s10">key</span><span class="s1">] = </span><span class="s10">idx</span><span class="s1">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">missing</span><span class="s8">.</span><span class="s1">length</span><span class="s8">) {</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">throw</span><span class="s4"> </span><span class="s1">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">      </span></span><span class="s1">"Deze headers ontbreken (na normalisatie) in rij 1 van '"</span><span class="s4"> +</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">sheet</span><span class="s1">.</span><span class="s10">getName</span><span class="s1">() +</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s6">"':\n- "</span><span class="s1"> +</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">missing</span><span class="s1">.</span><span class="s10">join</span><span class="s1">(</span><span class="s6">"\n- "</span><span class="s1">)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s5">COL</span><span class="s1"> = </span><span class="s10">map</span><span class="s1">;</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">return</span><span class="s4"> </span><span class="s5">COL</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Health checks + test helpers</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p4"><span class="s3">function</span><span class="s4"> </span><span class="s1">HEALTHCHECK_all</span><span class="s4">() {</span></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">ss</span><span class="s8"> = </span><span class="s14">SpreadsheetApp</span><span class="s8">.</span><span class="s10">getActive</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">main</span><span class="s8"> = </span><span class="s1">ss</span><span class="s8">.</span><span class="s1">getSheetByName</span><span class="s8">(</span><span class="s5">SHEET_MAIN</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">settings</span><span class="s8"> = </span><span class="s1">ss</span><span class="s8">.</span><span class="s1">getSheetByName</span><span class="s8">(</span><span class="s5">SHEET_SETTINGS</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s4"> (!</span><span class="s12">main</span><span class="s4">) </span><span class="s3">throw</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span><span class="s1">"Sheet '"</span><span class="s4"> + </span><span class="s5">SHEET_MAIN</span><span class="s4"> + </span><span class="s1">"' niet gevonden."</span><span class="s4">);</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s4"> (!</span><span class="s12">settings</span><span class="s4">) </span><span class="s3">throw</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span><span class="s1">"Sheet '"</span><span class="s4"> + </span><span class="s5">SHEET_SETTINGS</span><span class="s4"> + </span><span class="s1">"' niet gevonden."</span><span class="s4">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s4"> </span><span class="s12">keysToCheck</span><span class="s4"> = [</span><span class="s1">"AFSTEMMING"</span><span class="s4">, </span><span class="s1">"VOORSTEL"</span><span class="s4">, </span><span class="s1">"BEVESTIGING"</span><span class="s4">, </span><span class="s1">"AKKOORD"</span><span class="s4">];</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">missingTpl</span><span class="s8"> = </span><span class="s1">keysToCheck</span><span class="s8">.</span><span class="s1">filter</span><span class="s8">((</span><span class="s1">k</span><span class="s8">) =&gt; !</span><span class="s1">getTemplateByKey_</span><span class="s8">(</span><span class="s1">settings</span><span class="s8">, </span><span class="s1">k</span><span class="s8">));</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">missingTpl</span><span class="s8">.</span><span class="s1">length</span><span class="s8">) {</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">throw</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span><span class="s1">"Templates ontbreken in Instellingen (kolom D): "</span><span class="s4"> + </span><span class="s12">missingTpl</span><span class="s4">.</span><span class="s12">join</span><span class="s4">(</span><span class="s1">", "</span><span class="s4">));</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">cal</span><span class="s8"> = </span><span class="s14">CalendarApp</span><span class="s8">.</span><span class="s10">getCalendarById</span><span class="s8">(</span><span class="s14">CALENDAR_ID</span><span class="s8">);</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s4"> (!</span><span class="s12">cal</span><span class="s4">) </span><span class="s3">throw</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span><span class="s1">"Calendar niet gevonden. Check CALENDAR_ID."</span><span class="s4">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s5">Logger</span><span class="s4">.</span><span class="s12">log</span><span class="s4">(</span><span class="s1">"✅ HEALTHCHECK: headers, templates en calendar zijn aanwezig."</span><span class="s4">);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p4"><span class="s3">function</span><span class="s4"> </span><span class="s1">TEST_makeCalendarEventsForActiveRow</span><span class="s4">() {</span></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">ss</span><span class="s8"> = </span><span class="s14">SpreadsheetApp</span><span class="s8">.</span><span class="s10">getActive</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">main</span><span class="s8"> = </span><span class="s1">ss</span><span class="s8">.</span><span class="s1">getSheetByName</span><span class="s8">(</span><span class="s5">SHEET_MAIN</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">row</span><span class="s8"> = </span><span class="s1">main</span><span class="s8">.</span><span class="s1">getActiveRange</span><span class="s8">().</span><span class="s1">getRow</span><span class="s8">();</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s4"> (</span><span class="s12">row</span><span class="s4"> &lt; </span><span class="s7">2</span><span class="s4">) </span><span class="s3">throw</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span><span class="s1">"Selecteer een datarij (niet header)."</span><span class="s4">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">syncCalendarForRow_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">, </span><span class="s1">row</span><span class="s8">);</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s5">Logger</span><span class="s4">.</span><span class="s12">log</span><span class="s4">(</span><span class="s1">"✅ Calendar sync gedaan voor rij "</span><span class="s4"> + </span><span class="s12">row</span><span class="s4">);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p4"><span class="s3">function</span><span class="s4"> </span><span class="s1">TEST_makeDraftForActiveRow_AFSTEMMING</span><span class="s4">() {</span></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">ss</span><span class="s8"> = </span><span class="s14">SpreadsheetApp</span><span class="s8">.</span><span class="s10">getActive</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">main</span><span class="s8"> = </span><span class="s1">ss</span><span class="s8">.</span><span class="s1">getSheetByName</span><span class="s8">(</span><span class="s5">SHEET_MAIN</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">row</span><span class="s8"> = </span><span class="s1">main</span><span class="s8">.</span><span class="s1">getActiveRange</span><span class="s8">().</span><span class="s1">getRow</span><span class="s8">();</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s4"> (</span><span class="s12">row</span><span class="s4"> &lt; </span><span class="s7">2</span><span class="s4">) </span><span class="s3">throw</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span><span class="s1">"Selecteer een datarij (niet header)."</span><span class="s4">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">createDraftFromSheetTemplate_</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s6">"AFSTEMMING"</span><span class="s8">);</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s5">Logger</span><span class="s4">.</span><span class="s12">log</span><span class="s4">(</span><span class="s1">"✅ Draft gemaakt voor rij "</span><span class="s4"> + </span><span class="s12">row</span><span class="s4">);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p4"><span class="s3">function</span><span class="s4"> </span><span class="s1">TEST_GMAILAPI_readSignatureForMe</span><span class="s4">() {</span></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">ss</span><span class="s8"> = </span><span class="s14">SpreadsheetApp</span><span class="s8">.</span><span class="s10">getActive</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">main</span><span class="s8"> = </span><span class="s1">ss</span><span class="s8">.</span><span class="s1">getSheetByName</span><span class="s8">(</span><span class="s5">SHEET_MAIN</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">main</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">row</span><span class="s8"> = </span><span class="s1">main</span><span class="s8">.</span><span class="s1">getActiveRange</span><span class="s8">().</span><span class="s1">getRow</span><span class="s8">();</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s4"> (</span><span class="s12">row</span><span class="s4"> &lt; </span><span class="s7">2</span><span class="s4">) </span><span class="s3">throw</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span><span class="s1">"Selecteer een datarij (niet header)."</span><span class="s4">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Test Gmail API: users.settings.sendAs.get</span></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">sendAs</span><span class="s8"> = </span><span class="s14">Gmail</span><span class="s8">.</span><span class="s14">Users</span><span class="s8">.</span><span class="s14">Settings</span><span class="s8">.</span><span class="s14">SendAs</span><span class="s8">.</span><span class="s3">get</span><span class="s8">(</span><span class="s6">"me"</span><span class="s8">, </span><span class="s14">Session</span><span class="s8">.</span><span class="s10">getActiveUser</span><span class="s8">().</span><span class="s10">getEmail</span><span class="s8">());</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">sig</span><span class="s8"> = (</span><span class="s1">sendAs</span><span class="s8"> &amp;&amp; </span><span class="s1">sendAs</span><span class="s8">.</span><span class="s1">signature</span><span class="s8">) ? </span><span class="s5">String</span><span class="s8">(</span><span class="s1">sendAs</span><span class="s8">.</span><span class="s1">signature</span><span class="s8">) : </span><span class="s6">""</span><span class="s8">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Log in debug kolom (of pas aan als jij andere naam gebruikt)</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s5">COL</span><span class="s8">.</span><span class="s1">debug</span><span class="s8">) </span><span class="s1">main</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">debug</span><span class="s8">).</span><span class="s1">setValue</span><span class="s8">(</span><span class="s6">"✅ Gmail API OK. signature length="</span><span class="s8"> + </span><span class="s1">sig</span><span class="s8">.</span><span class="s1">length</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s5">Logger</span><span class="s4">.</span><span class="s12">log</span><span class="s4">(</span><span class="s1">"✅ Gmail API OK. signature length="</span><span class="s4"> + </span><span class="s12">sig</span><span class="s4">.</span><span class="s12">length</span><span class="s4">);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p1"><span class="s1">/**</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* Utilities</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>* =========================================</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*/</span></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">getProviderInfoByName_</span><span class="s8">(</span><span class="s1">providerName</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">name</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">providerName</span><span class="s8"> || </span><span class="s6">""</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p9"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s13">if</span><span class="s8"> (!</span><span class="s10">name</span><span class="s8">) </span><span class="s13">return</span><span class="s8"> </span><span class="s13">null</span><span class="s8">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p11"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">ss</span><span class="s8"> = </span><span class="s14">SpreadsheetApp</span><span class="s8">.</span><span class="s10">getActive</span><span class="s8">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">sh</span><span class="s8"> = </span><span class="s1">ss</span><span class="s8">.</span><span class="s1">getSheetByName</span><span class="s8">(</span><span class="s5">SHEET_PROVIDERS</span><span class="s8">);</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s4"> (!</span><span class="s12">sh</span><span class="s4">) </span><span class="s3">throw</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s5">Error</span><span class="s4">(</span><span class="s1">"Sheet '"</span><span class="s4"> + </span><span class="s5">SHEET_PROVIDERS</span><span class="s4"> + </span><span class="s1">"' niet gevonden."</span><span class="s4">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Pas aan als jouw aanbieders-tab anders is:</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s5">COLS</span><span class="s1"> = { </span><span class="s10">name</span><span class="s1">: </span><span class="s7">1</span><span class="s1">, </span><span class="s10">contact</span><span class="s1">: </span><span class="s7">2</span><span class="s1">, </span><span class="s10">email</span><span class="s1">: </span><span class="s7">3</span><span class="s1">, </span><span class="s10">phone</span><span class="s1">: </span><span class="s7">4</span><span class="s1"> }; </span><span class="s9">// A/B/C/D</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">lastRow</span><span class="s8"> = </span><span class="s1">sh</span><span class="s8">.</span><span class="s1">getLastRow</span><span class="s8">();</span></p>
-<p class="p9"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s13">if</span><span class="s8"> (</span><span class="s10">lastRow</span><span class="s8"> &lt; </span><span class="s7">2</span><span class="s8">) </span><span class="s13">return</span><span class="s8"> </span><span class="s13">null</span><span class="s8">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">values</span><span class="s8"> = </span><span class="s1">sh</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s7">2</span><span class="s8">, </span><span class="s7">1</span><span class="s8">, </span><span class="s1">lastRow</span><span class="s8"> - </span><span class="s7">1</span><span class="s8">, </span><span class="s5">Math</span><span class="s8">.</span><span class="s1">max</span><span class="s8">(</span><span class="s5">COLS</span><span class="s8">.</span><span class="s1">phone</span><span class="s8">, </span><span class="s5">COLS</span><span class="s8">.</span><span class="s1">email</span><span class="s8">, </span><span class="s5">COLS</span><span class="s8">.</span><span class="s1">contact</span><span class="s8">)).</span><span class="s1">getValues</span><span class="s8">();</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">for</span><span class="s1"> (</span><span class="s3">const</span><span class="s1"> </span><span class="s10">r</span><span class="s1"> </span><span class="s3">of</span><span class="s1"> </span><span class="s10">values</span><span class="s1">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">n</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">r</span><span class="s1">[</span><span class="s5">COLS</span><span class="s1">.</span><span class="s10">name</span><span class="s1"> - </span><span class="s7">1</span><span class="s1">] || </span><span class="s6">""</span><span class="s1">).</span><span class="s10">trim</span><span class="s1">();</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">n</span><span class="s8">.</span><span class="s1">toLowerCase</span><span class="s8">() === </span><span class="s1">name</span><span class="s8">.</span><span class="s1">toLowerCase</span><span class="s8">()) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">return</span><span class="s1"> {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">name</span><span class="s1">: </span><span class="s10">n</span><span class="s1">,</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">contact</span><span class="s1">: </span><span class="s5">String</span><span class="s1">(</span><span class="s10">r</span><span class="s1">[</span><span class="s5">COLS</span><span class="s1">.</span><span class="s10">contact</span><span class="s1"> - </span><span class="s7">1</span><span class="s1">] || </span><span class="s6">""</span><span class="s1">).</span><span class="s10">trim</span><span class="s1">(),</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">email</span><span class="s1">: </span><span class="s5">String</span><span class="s1">(</span><span class="s10">r</span><span class="s1">[</span><span class="s5">COLS</span><span class="s1">.</span><span class="s10">email</span><span class="s1"> - </span><span class="s7">1</span><span class="s1">] || </span><span class="s6">""</span><span class="s1">).</span><span class="s10">trim</span><span class="s1">(),</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">phone</span><span class="s1">: </span><span class="s5">String</span><span class="s1">(</span><span class="s10">r</span><span class="s1">[</span><span class="s5">COLS</span><span class="s1">.</span><span class="s10">phone</span><span class="s1"> - </span><span class="s7">1</span><span class="s1">] || </span><span class="s6">""</span><span class="s1">).</span><span class="s10">trim</span><span class="s1">(),</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span>};</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">return</span><span class="s4"> </span><span class="s1">null</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">getOrCreateLabel_</span><span class="s8">(</span><span class="s1">labelName</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">let</span><span class="s8"> </span><span class="s1">label</span><span class="s8"> = </span><span class="s5">GmailApp</span><span class="s8">.</span><span class="s1">getUserLabelByName</span><span class="s8">(</span><span class="s1">labelName</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (!</span><span class="s1">label</span><span class="s8">) </span><span class="s1">label</span><span class="s8"> = </span><span class="s5">GmailApp</span><span class="s8">.</span><span class="s1">createLabel</span><span class="s8">(</span><span class="s1">labelName</span><span class="s8">);</span></p>
-<p class="p9"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s13">return</span><span class="s8"> </span><span class="s10">label</span><span class="s8">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">debug_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">, </span><span class="s1">row</span><span class="s8">, </span><span class="s1">message</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s5">COL</span><span class="s1">.</span><span class="s10">debug</span><span class="s1">) </span><span class="s3">return</span><span class="s1">;</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">existing</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">debug</span><span class="s8">).</span><span class="s1">getValue</span><span class="s8">() || </span><span class="s6">""</span><span class="s8">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">debug</span><span class="s8">).</span><span class="s1">setValue</span><span class="s8">(</span><span class="s1">existing</span><span class="s8"> ? </span><span class="s1">existing</span><span class="s8"> + </span><span class="s6">"\n"</span><span class="s8"> + </span><span class="s1">message</span><span class="s8"> : </span><span class="s1">message</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">clearDebug_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">, </span><span class="s1">row</span><span class="s8">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">initCols_</span><span class="s8">(</span><span class="s1">sheet</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s5">COL</span><span class="s1">.</span><span class="s10">debug</span><span class="s1">) </span><span class="s3">return</span><span class="s1">;</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">sheet</span><span class="s8">.</span><span class="s1">getRange</span><span class="s8">(</span><span class="s1">row</span><span class="s8">, </span><span class="s5">COL</span><span class="s8">.</span><span class="s1">debug</span><span class="s8">).</span><span class="s1">clearContent</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">replaceAll_</span><span class="s8">(</span><span class="s1">text</span><span class="s8">, </span><span class="s1">map</span><span class="s8">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">let</span><span class="s1"> </span><span class="s10">out</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">text</span><span class="s1"> || </span><span class="s6">""</span><span class="s1">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s5">Object</span><span class="s8">.</span><span class="s1">keys</span><span class="s8">(</span><span class="s1">map</span><span class="s8">).</span><span class="s1">forEach</span><span class="s8">((</span><span class="s1">k</span><span class="s8">) =&gt; (</span><span class="s1">out</span><span class="s8"> = </span><span class="s1">out</span><span class="s8">.</span><span class="s1">split</span><span class="s8">(</span><span class="s1">k</span><span class="s8">).</span><span class="s1">join</span><span class="s8">(</span><span class="s1">map</span><span class="s8">[</span><span class="s1">k</span><span class="s8">] ?? </span><span class="s6">""</span><span class="s8">)));</span></p>
-<p class="p9"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s13">return</span><span class="s8"> </span><span class="s10">out</span><span class="s8">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">formatDate_</span><span class="s8">(</span><span class="s1">value</span><span class="s8">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">value</span><span class="s1"> === </span><span class="s3">null</span><span class="s1"> || </span><span class="s10">value</span><span class="s1"> === </span><span class="s3">undefined</span><span class="s1"> || </span><span class="s10">value</span><span class="s1"> === </span><span class="s6">""</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s6">""</span><span class="s1">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">tz</span><span class="s8"> = </span><span class="s5">Session</span><span class="s8">.</span><span class="s1">getScriptTimeZone</span><span class="s8">();</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// 1) Als het een echte Date is (Sheets date/datetime)</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s5">Object</span><span class="s8">.</span><span class="s1">prototype</span><span class="s8">.</span><span class="s1">toString</span><span class="s8">.</span><span class="s1">call</span><span class="s8">(</span><span class="s1">value</span><span class="s8">) === </span><span class="s6">"[object Date]"</span><span class="s8"> &amp;&amp; !</span><span class="s1">isNaN</span><span class="s8">(</span><span class="s1">value</span><span class="s8">.</span><span class="s1">getTime</span><span class="s8">())) {</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// Met tijd als er tijd aanwezig is (niet middernacht)</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">hasTime</span><span class="s8"> = </span><span class="s1">value</span><span class="s8">.</span><span class="s1">getHours</span><span class="s8">() !== </span><span class="s7">0</span><span class="s8"> || </span><span class="s1">value</span><span class="s8">.</span><span class="s1">getMinutes</span><span class="s8">() !== </span><span class="s7">0</span><span class="s8">;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s4"> </span><span class="s12">fmt</span><span class="s4"> = </span><span class="s12">hasTime</span><span class="s4"> ? </span><span class="s1">"dd-MM-yyyy HH:mm"</span><span class="s4"> : </span><span class="s1">"dd-MM-yyyy"</span><span class="s4">;</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">return</span><span class="s8"> </span><span class="s5">Utilities</span><span class="s8">.</span><span class="s1">formatDate</span><span class="s8">(</span><span class="s1">value</span><span class="s8">, </span><span class="s1">tz</span><span class="s8">, </span><span class="s1">fmt</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// 2) Anders: behandel als tekst (kan multiline zijn)</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">let</span><span class="s8"> </span><span class="s1">text</span><span class="s8"> = </span><span class="s5">String</span><span class="s8">(</span><span class="s1">value</span><span class="s8">).</span><span class="s1">replace</span><span class="s8">(</span><span class="s15">/\r\n/</span><span class="s3">g</span><span class="s8">, </span><span class="s6">"\n"</span><span class="s8">).</span><span class="s1">replace</span><span class="s8">(</span><span class="s15">/\r/</span><span class="s3">g</span><span class="s8">, </span><span class="s6">"\n"</span><span class="s8">).</span><span class="s1">trim</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">text</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s6">""</span><span class="s1">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">lines</span><span class="s8"> = </span><span class="s1">text</span><span class="s8">.</span><span class="s1">split</span><span class="s8">(</span><span class="s6">"\n"</span><span class="s8">).</span><span class="s1">map</span><span class="s8">(</span><span class="s1">s</span><span class="s8"> =&gt; </span><span class="s1">s</span><span class="s8">.</span><span class="s1">trim</span><span class="s8">()).</span><span class="s1">filter</span><span class="s8">(</span><span class="s5">Boolean</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">out</span><span class="s8"> = </span><span class="s1">lines</span><span class="s8">.</span><span class="s1">map</span><span class="s8">(</span><span class="s1">line</span><span class="s8"> =&gt; {</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// a) dd-mm-jjjj HH:MM-HH:MM<span class="Apple-converted-space">  </span>(we houden tijden zoals ze zijn)</span></p>
-<p class="p12"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">let</span><span class="s4"> </span><span class="s12">m</span><span class="s4"> = </span><span class="s12">line</span><span class="s4">.</span><span class="s12">match</span><span class="s4">(</span><span class="s1">/^(\d{1,2})-(\d{1,2})-(\d{4})(\s+(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2}))$/</span><span class="s4">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">m</span><span class="s1">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">dd</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">1</span><span class="s1">]).</span><span class="s10">padStart</span><span class="s1">(</span><span class="s7">2</span><span class="s1">, </span><span class="s6">"0"</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">mm</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">2</span><span class="s1">]).</span><span class="s10">padStart</span><span class="s1">(</span><span class="s7">2</span><span class="s1">, </span><span class="s6">"0"</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">yyyy</span><span class="s1"> = </span><span class="s10">m</span><span class="s1">[</span><span class="s7">3</span><span class="s1">];</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">      </span></span><span class="s1">// tijden exact laten staan (maar je kunt hier ook padStart doen als je wil)</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s4"> </span><span class="s12">rest</span><span class="s4"> = </span><span class="s12">m</span><span class="s4">[</span><span class="s7">4</span><span class="s4">]; </span><span class="s1">// inclusief spatie + tijd-range</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">return</span><span class="s1"> </span><span class="s6">`</span><span class="s1">${</span><span class="s10">dd</span><span class="s1">}</span><span class="s6">-</span><span class="s1">${</span><span class="s10">mm</span><span class="s1">}</span><span class="s6">-</span><span class="s1">${</span><span class="s10">yyyy</span><span class="s1">}${</span><span class="s10">rest</span><span class="s1">}</span><span class="s6">`</span><span class="s1">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// b) dd-mm-jjjj HH:MM (single time)</span></p>
-<p class="p12"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s12">m</span><span class="s4"> = </span><span class="s12">line</span><span class="s4">.</span><span class="s12">match</span><span class="s4">(</span><span class="s1">/^(\d{1,2})-(\d{1,2})-(\d{4})\s+(\d{1,2}):(\d{2})$/</span><span class="s4">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">m</span><span class="s1">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">dd</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">1</span><span class="s1">]).</span><span class="s10">padStart</span><span class="s1">(</span><span class="s7">2</span><span class="s1">, </span><span class="s6">"0"</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">mm</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">2</span><span class="s1">]).</span><span class="s10">padStart</span><span class="s1">(</span><span class="s7">2</span><span class="s1">, </span><span class="s6">"0"</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">yyyy</span><span class="s1"> = </span><span class="s10">m</span><span class="s1">[</span><span class="s7">3</span><span class="s1">];</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">hh</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">4</span><span class="s1">]).</span><span class="s10">padStart</span><span class="s1">(</span><span class="s7">2</span><span class="s1">, </span><span class="s6">"0"</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">min</span><span class="s1"> = </span><span class="s10">m</span><span class="s1">[</span><span class="s7">5</span><span class="s1">];</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">return</span><span class="s1"> </span><span class="s6">`</span><span class="s1">${</span><span class="s10">dd</span><span class="s1">}</span><span class="s6">-</span><span class="s1">${</span><span class="s10">mm</span><span class="s1">}</span><span class="s6">-</span><span class="s1">${</span><span class="s10">yyyy</span><span class="s1">}</span><span class="s6"> </span><span class="s1">${</span><span class="s10">hh</span><span class="s1">}</span><span class="s6">:</span><span class="s1">${</span><span class="s10">min</span><span class="s1">}</span><span class="s6">`</span><span class="s1">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// c) dd-mm-jjjj (alleen datum)</span></p>
-<p class="p12"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s12">m</span><span class="s4"> = </span><span class="s12">line</span><span class="s4">.</span><span class="s12">match</span><span class="s4">(</span><span class="s1">/^(\d{1,2})-(\d{1,2})-(\d{4})$/</span><span class="s4">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">m</span><span class="s1">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">dd</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">1</span><span class="s1">]).</span><span class="s10">padStart</span><span class="s1">(</span><span class="s7">2</span><span class="s1">, </span><span class="s6">"0"</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">mm</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">2</span><span class="s1">]).</span><span class="s10">padStart</span><span class="s1">(</span><span class="s7">2</span><span class="s1">, </span><span class="s6">"0"</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">yyyy</span><span class="s1"> = </span><span class="s10">m</span><span class="s1">[</span><span class="s7">3</span><span class="s1">];</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s3">return</span><span class="s1"> </span><span class="s6">`</span><span class="s1">${</span><span class="s10">dd</span><span class="s1">}</span><span class="s6">-</span><span class="s1">${</span><span class="s10">mm</span><span class="s1">}</span><span class="s6">-</span><span class="s1">${</span><span class="s10">yyyy</span><span class="s1">}</span><span class="s6">`</span><span class="s1">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// d) Fallback: probeer Date parsing (laat originele lijn staan als het niet lukt)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">parsed</span><span class="s1"> = </span><span class="s3">new</span><span class="s1"> </span><span class="s5">Date</span><span class="s1">(</span><span class="s10">line</span><span class="s1">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s8"> (!</span><span class="s1">isNaN</span><span class="s8">(</span><span class="s1">parsed</span><span class="s8">.</span><span class="s1">getTime</span><span class="s8">())) {</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">      </span></span><span class="s3">const</span><span class="s4"> </span><span class="s12">fmt</span><span class="s4"> = </span><span class="s1">"dd-MM-yyyy HH:mm"</span><span class="s4">;</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s3">return</span><span class="s8"> </span><span class="s5">Utilities</span><span class="s8">.</span><span class="s1">formatDate</span><span class="s8">(</span><span class="s1">parsed</span><span class="s8">, </span><span class="s1">tz</span><span class="s8">, </span><span class="s1">fmt</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s3">return</span><span class="s4"> </span><span class="s12">line</span><span class="s4">; </span><span class="s1">// onbekend formaat: laat staan</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">return</span><span class="s1"> </span><span class="s10">out</span><span class="s1">.</span><span class="s10">join</span><span class="s1">(</span><span class="s6">"\n"</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">textToHtml_</span><span class="s8">(</span><span class="s1">text</span><span class="s8">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">text</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s6">""</span><span class="s1">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">let</span><span class="s1"> </span><span class="s10">t</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">text</span><span class="s1">).</span><span class="s10">replace</span><span class="s1">(</span><span class="s15">/\r\n/</span><span class="s3">g</span><span class="s1">, </span><span class="s6">"\n"</span><span class="s1">).</span><span class="s10">replace</span><span class="s1">(</span><span class="s15">/\r/</span><span class="s3">g</span><span class="s1">, </span><span class="s6">"\n"</span><span class="s1">);</span></p>
-<p class="p13"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s10">hasHtmlTags</span><span class="s8"> = </span><span class="s16">/&lt;\/?[a-z][\s\S]*&gt;/</span><span class="s3">i</span><span class="s8">.</span><span class="s10">test</span><span class="s8">(</span><span class="s10">t</span><span class="s8">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s8"> (</span><span class="s1">hasHtmlTags</span><span class="s8">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s10">t</span><span class="s1"> = </span><span class="s10">t</span><span class="s1">.</span><span class="s10">replace</span><span class="s1">(</span><span class="s15">/\n/</span><span class="s3">g</span><span class="s1">, </span><span class="s6">"&lt;br&gt;\n"</span><span class="s1">);</span></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s4"> </span><span class="s6">`</span></p>
-<p class="p3"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div style="font-family: Verdana, Arial, sans-serif; font-size: 10pt; line-height: 1.4;"&gt;</span></p>
-<p class="p3"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">${</span><span class="s12">t</span><span class="s4">}</span></p>
-<p class="p3"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p3"><span class="s1"><span class="Apple-converted-space">    </span>`</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">paragraphs</span><span class="s8"> = </span><span class="s1">t</span></p>
-<p class="p13"><span class="s8"><span class="Apple-converted-space">    </span>.</span><span class="s10">split</span><span class="s8">(</span><span class="s16">/\n\s*\n/</span><span class="s8">)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>.</span><span class="s10">map</span><span class="s1">(</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span>(</span><span class="s10">p</span><span class="s1">) =&gt;</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s1">`&lt;p style="font-family: Verdana, Arial, sans-serif; font-size: 10pt; line-height: 1.4; margin: 0 0 10px 0;"&gt;</span><span class="s4">${</span><span class="s12">p</span><span class="s4">.</span><span class="s12">replace</span><span class="s4">(</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">          </span></span><span class="s15">/\n/</span><span class="s3">g</span><span class="s1">,</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">          </span></span><span class="s6">"&lt;br&gt;\n"</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span>)}</span><span class="s6">&lt;/p&gt;`</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>)</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>.</span><span class="s10">join</span><span class="s1">(</span><span class="s6">"\n"</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">return</span><span class="s8"> </span><span class="s1">paragraphs</span><span class="s8">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">formatWorkshopDatesGrouped_</span><span class="s8">(</span><span class="s1">input</span><span class="s8">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">input</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s6">""</span><span class="s1">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">text</span><span class="s1"> = </span><span class="s5">String</span><span class="s1">(</span><span class="s10">input</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p12"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s4"> </span><span class="s12">re</span><span class="s4"> = </span><span class="s1">/(\b\d{1,2})[-\/](\d{1,2})[-\/](\d{4})\b/</span><span class="s3">g</span><span class="s4">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">dates</span><span class="s1"> = [];</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">let</span><span class="s1"> </span><span class="s10">m</span><span class="s1">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">while</span><span class="s1"> ((</span><span class="s10">m</span><span class="s1"> = </span><span class="s10">re</span><span class="s1">.</span><span class="s10">exec</span><span class="s1">(</span><span class="s10">text</span><span class="s1">)) !== </span><span class="s3">null</span><span class="s1">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">day</span><span class="s1"> = </span><span class="s10">parseInt</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">1</span><span class="s1">], </span><span class="s7">10</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">month</span><span class="s1"> = </span><span class="s10">parseInt</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">2</span><span class="s1">], </span><span class="s7">10</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">year</span><span class="s1"> = </span><span class="s10">parseInt</span><span class="s1">(</span><span class="s10">m</span><span class="s1">[</span><span class="s7">3</span><span class="s1">], </span><span class="s7">10</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">dt</span><span class="s1"> = </span><span class="s3">new</span><span class="s1"> </span><span class="s5">Date</span><span class="s1">(</span><span class="s10">year</span><span class="s1">, </span><span class="s10">month</span><span class="s1"> - </span><span class="s7">1</span><span class="s1">, </span><span class="s10">day</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s10">dt</span><span class="s1">.</span><span class="s10">getFullYear</span><span class="s1">() === </span><span class="s10">year</span><span class="s1"> &amp;&amp;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s10">dt</span><span class="s1">.</span><span class="s10">getMonth</span><span class="s1">() === </span><span class="s10">month</span><span class="s1"> - </span><span class="s7">1</span><span class="s1"> &amp;&amp;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s10">dt</span><span class="s1">.</span><span class="s10">getDate</span><span class="s1">() === </span><span class="s10">day</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s1">dates</span><span class="s8">.</span><span class="s1">push</span><span class="s8">(</span><span class="s1">dt</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">dates</span><span class="s1">.</span><span class="s10">length</span><span class="s1"> === </span><span class="s7">0</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s6">""</span><span class="s1">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Sorteer chronologisch</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s10">dates</span><span class="s1">.</span><span class="s10">sort</span><span class="s1">((</span><span class="s10">a</span><span class="s1">, </span><span class="s10">b</span><span class="s1">) =&gt; </span><span class="s10">a</span><span class="s1"> - </span><span class="s10">b</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Deduplicate</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">unique</span><span class="s1"> = [];</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">seen</span><span class="s1"> = </span><span class="s3">new</span><span class="s1"> </span><span class="s5">Set</span><span class="s1">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">for</span><span class="s1"> (</span><span class="s3">const</span><span class="s1"> </span><span class="s10">d</span><span class="s1"> </span><span class="s3">of</span><span class="s1"> </span><span class="s10">dates</span><span class="s1">) {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">key</span><span class="s8"> = </span><span class="s1">d</span><span class="s8">.</span><span class="s1">toISOString</span><span class="s8">().</span><span class="s1">slice</span><span class="s8">(</span><span class="s7">0</span><span class="s8">, </span><span class="s7">10</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">seen</span><span class="s1">.</span><span class="s10">has</span><span class="s1">(</span><span class="s10">key</span><span class="s1">)) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s10">seen</span><span class="s1">.</span><span class="s10">add</span><span class="s1">(</span><span class="s10">key</span><span class="s1">);</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">      </span></span><span class="s1">unique</span><span class="s8">.</span><span class="s1">push</span><span class="s8">(</span><span class="s1">d</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">monthsNl</span><span class="s8"> = [</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">"januari"</span><span class="s4">, </span><span class="s1">"februari"</span><span class="s4">, </span><span class="s1">"maart"</span><span class="s4">, </span><span class="s1">"april"</span><span class="s4">, </span><span class="s1">"mei"</span><span class="s4">, </span><span class="s1">"juni"</span><span class="s4">,</span></p>
-<p class="p3"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">"juli"</span><span class="s4">, </span><span class="s1">"augustus"</span><span class="s4">, </span><span class="s1">"september"</span><span class="s4">, </span><span class="s1">"oktober"</span><span class="s4">, </span><span class="s1">"november"</span><span class="s4">, </span><span class="s1">"december"</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>];</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">// Groeperen per maand+jaar</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">grouped</span><span class="s1"> = {};</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s1">unique</span><span class="s8">.</span><span class="s1">forEach</span><span class="s8">(</span><span class="s1">dt</span><span class="s8"> =&gt; {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">key</span><span class="s8"> = </span><span class="s1">dt</span><span class="s8">.</span><span class="s1">getFullYear</span><span class="s8">() + </span><span class="s6">"-"</span><span class="s8"> + </span><span class="s1">dt</span><span class="s8">.</span><span class="s1">getMonth</span><span class="s8">();</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (!</span><span class="s10">grouped</span><span class="s1">[</span><span class="s10">key</span><span class="s1">]) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s10">grouped</span><span class="s1">[</span><span class="s10">key</span><span class="s1">] = {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">        </span></span><span class="s1">year</span><span class="s8">: </span><span class="s1">dt</span><span class="s8">.</span><span class="s1">getFullYear</span><span class="s8">(),</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">        </span></span><span class="s1">month</span><span class="s8">: </span><span class="s1">dt</span><span class="s8">.</span><span class="s1">getMonth</span><span class="s8">(),</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s10">days</span><span class="s1">: []</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span>};</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s1">grouped</span><span class="s8">[</span><span class="s1">key</span><span class="s8">].</span><span class="s1">days</span><span class="s8">.</span><span class="s1">push</span><span class="s8">(</span><span class="s1">dt</span><span class="s8">.</span><span class="s1">getDate</span><span class="s8">());</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">parts</span><span class="s8"> = </span><span class="s5">Object</span><span class="s8">.</span><span class="s1">values</span><span class="s8">(</span><span class="s1">grouped</span><span class="s8">).</span><span class="s1">map</span><span class="s8">(</span><span class="s1">group</span><span class="s8"> =&gt; {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">daysText</span><span class="s8"> = </span><span class="s1">joinNl_</span><span class="s8">(</span><span class="s1">group</span><span class="s8">.</span><span class="s1">days</span><span class="s8">.</span><span class="s1">map</span><span class="s8">(</span><span class="s5">String</span><span class="s8">));</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">monthName</span><span class="s8"> = </span><span class="s1">monthsNl</span><span class="s8">[</span><span class="s1">group</span><span class="s8">.</span><span class="s1">month</span><span class="s8">];</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s3">return</span><span class="s8"> </span><span class="s6">`</span><span class="s8">${</span><span class="s1">daysText</span><span class="s8">}</span><span class="s6"> </span><span class="s8">${</span><span class="s1">monthName</span><span class="s8">}</span><span class="s6">`</span><span class="s8">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">return</span><span class="s8"> </span><span class="s1">joinNl_</span><span class="s8">(</span><span class="s1">parts</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">joinNl_</span><span class="s8">(</span><span class="s1">parts</span><span class="s8">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">parts</span><span class="s1">.</span><span class="s10">length</span><span class="s1"> === </span><span class="s7">1</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s10">parts</span><span class="s1">[</span><span class="s7">0</span><span class="s1">];</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">parts</span><span class="s1">.</span><span class="s10">length</span><span class="s1"> === </span><span class="s7">2</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s6">`</span><span class="s1">${</span><span class="s10">parts</span><span class="s1">[</span><span class="s7">0</span><span class="s1">]}</span><span class="s6"> en </span><span class="s1">${</span><span class="s10">parts</span><span class="s1">[</span><span class="s7">1</span><span class="s1">]}</span><span class="s6">`</span><span class="s1">;</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">return</span><span class="s8"> </span><span class="s6">`</span><span class="s8">${</span><span class="s1">parts</span><span class="s8">.</span><span class="s1">slice</span><span class="s8">(</span><span class="s7">0</span><span class="s8">, -</span><span class="s7">1</span><span class="s8">).</span><span class="s1">join</span><span class="s8">(</span><span class="s6">", "</span><span class="s8">)}</span><span class="s6"> en </span><span class="s8">${</span><span class="s1">parts</span><span class="s8">[</span><span class="s1">parts</span><span class="s8">.</span><span class="s1">length</span><span class="s8"> - </span><span class="s7">1</span><span class="s8">]}</span><span class="s6">`</span><span class="s8">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">formatNumberNl_</span><span class="s8">(</span><span class="s1">value</span><span class="s8">, </span><span class="s1">decimals</span><span class="s8"> = </span><span class="s7">2</span><span class="s8">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">value</span><span class="s1"> === </span><span class="s3">null</span><span class="s1"> || </span><span class="s10">value</span><span class="s1"> === </span><span class="s6">""</span><span class="s1"> || </span><span class="s10">value</span><span class="s1"> === </span><span class="s3">undefined</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s6">""</span><span class="s1">;</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span></span><span class="s3">const</span><span class="s8"> </span><span class="s1">num</span><span class="s8"> = </span><span class="s1">coerceToNumber_</span><span class="s8">(</span><span class="s1">value</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">num</span><span class="s1"> === </span><span class="s3">null</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s5">String</span><span class="s1">(</span><span class="s10">value</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p4"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s3">return</span><span class="s4"> </span><span class="s3">new</span><span class="s4"> </span><span class="s1">Intl</span><span class="s4">.</span><span class="s1">NumberFormat</span><span class="s4">(</span><span class="s6">"nl-NL"</span><span class="s4">, {</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s1">minimumFractionDigits</span><span class="s8">: </span><span class="s1">decimals</span><span class="s8">,</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s1">maximumFractionDigits</span><span class="s8">: </span><span class="s1">decimals</span></p>
-<p class="p6"><span class="s8"><span class="Apple-converted-space">  </span>}).</span><span class="s1">format</span><span class="s8">(</span><span class="s1">num</span><span class="s8">);</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p6"><span class="s3">function</span><span class="s8"> </span><span class="s1">coerceToNumber_</span><span class="s8">(</span><span class="s1">value</span><span class="s8">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s3">typeof</span><span class="s1"> </span><span class="s10">value</span><span class="s1"> === </span><span class="s6">"number"</span><span class="s1">) </span><span class="s3">return</span><span class="s1"> </span><span class="s10">value</span><span class="s1">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s3">typeof</span><span class="s1"> </span><span class="s10">value</span><span class="s1"> === </span><span class="s6">"string"</span><span class="s1">) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">let</span><span class="s1"> </span><span class="s10">s</span><span class="s1"> = </span><span class="s10">value</span><span class="s1">.</span><span class="s10">trim</span><span class="s1">();</span></p>
-<p class="p9"><span class="s8"><span class="Apple-converted-space">    </span></span><span class="s13">if</span><span class="s8"> (!</span><span class="s10">s</span><span class="s8">) </span><span class="s13">return</span><span class="s8"> </span><span class="s13">null</span><span class="s8">;</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// haal € en spaties weg</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s10">s</span><span class="s1"> = </span><span class="s10">s</span><span class="s1">.</span><span class="s10">replace</span><span class="s1">(</span><span class="s15">/€/</span><span class="s3">g</span><span class="s1">, </span><span class="s6">""</span><span class="s1">).</span><span class="s10">replace</span><span class="s1">(</span><span class="s15">/\s/</span><span class="s3">g</span><span class="s1">, </span><span class="s6">""</span><span class="s1">);</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// Als het NL-notatie is: 1.234,56 -&gt; 1234.56</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// Als het EN-notatie is: 1234.56 blijft 1234.56</span></p>
-<p class="p5"><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// Heuristiek: als er een komma in zit, is komma decimal en punten duizendtallen</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">if</span><span class="s1"> (</span><span class="s10">s</span><span class="s1">.</span><span class="s10">includes</span><span class="s1">(</span><span class="s6">","</span><span class="s1">)) {</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">      </span></span><span class="s10">s</span><span class="s1"> = </span><span class="s10">s</span><span class="s1">.</span><span class="s10">replace</span><span class="s1">(</span><span class="s15">/\./</span><span class="s3">g</span><span class="s1">, </span><span class="s6">""</span><span class="s1">).</span><span class="s10">replace</span><span class="s1">(</span><span class="s6">","</span><span class="s1">, </span><span class="s6">"."</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">const</span><span class="s1"> </span><span class="s10">num</span><span class="s1"> = </span><span class="s5">Number</span><span class="s1">(</span><span class="s10">s</span><span class="s1">);</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">return</span><span class="s1"> </span><span class="s5">Number</span><span class="s1">.</span><span class="s10">isFinite</span><span class="s1">(</span><span class="s10">num</span><span class="s1">) ? </span><span class="s10">num</span><span class="s1"> : </span><span class="s3">null</span><span class="s1">;</span></p>
-<p class="p7"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p10"><span class="s4"><span class="Apple-converted-space">  </span></span><span class="s1">return</span><span class="s4"> </span><span class="s1">null</span><span class="s4">;</span></p>
-<p class="p7"><span class="s1">}</span></p>
-<p class="p2"><span class="s2"></span><br></p>
-<p class="p2"><span class="s2"></span><br></p>
-</body>
-</html>
+/**
+ * =========================================
+ * Techles Planning – Gmail Drafts + Calendar Sync
+ * =========================================
+ * - Kolommen dynamisch via headers (met normalisatie; extra spaties in headers oké)
+ * - Drafts via Instellingen (D/E/F/G vanaf rij 3)
+ * - Calendar events: bron = 'Definitieve datum' (meerdere regels toegestaan)
+ * - Status wijziging => conceptmail maken (of vernieuwen als template verandert)
+ * - Status=Bevestiging => kalender sync (delete + recreate)
+ * - Wijziging Definitieve datum => alleen sync als Status al Bevestiging is
+ * - Status=Reset => logging leeg + events verwijderen
+ */
+
+/**
+ * =========================================
+ * CONFIG
+ * =========================================
+ */
+const SHEET_MAIN = "Aanvragen en Planning";
+const SHEET_SETTINGS = "Instellingen";
+const SHEET_PROVIDERS = "Aanbieders";
+
+const CALENDAR_ID =
+  "c_31bad5e42f4418281b5d51c7e989dc6ed337392554f095e1cc5ae5233b29b46a@group.calendar.google.com";
+
+// Instellingen templates: D/E/F/G/H vanaf rij 3
+const SETTINGS_START_ROW = 3;
+const SETTINGS_COL = { key: 4, subject: 5, body: 6, label: 7, emailTarget: 8 }; // D..H
+
+// Instellingen Signature bevat bv. "me" of "info@..."
+const SETTINGS_SIGNATURE_SENDAS_CELL = "B3"; 
+
+// Status -> TemplateKey mapping (exact match met je dropdown)
+const STATUS_TO_TEMPLATE = {
+  "Contact gelegd": "AFSTEMMING",
+  "Optie": "VOORSTEL",
+  "Bevestiging": "BEVESTIGING",
+  "Akkoord": "AKKOORD",
+};
+
+// Reset via status
+const ENABLE_RESET_STATUS = true;
+const RESET_STATUS_VALUE = "Reset";
+
+// Veiligheid: maak niet opnieuw een concept als er al een draftId staat
+// (maar: als templateKey verandert, maken we wél een nieuwe draft)
+const DONT_DUPLICATE_IF_DRAFT_EXISTS = true;
+
+/**
+ * ✅ Eén plek om je sheet-headers te beheren.
+ * Let op: jouw headers mogen extra spaties bevatten; we normaliseren.
+ */
+const COL_HEADERS = {
+  aanvraagId: 'Aanvraag ID',
+  school: "Schoolnaam",
+  contact: "Contactpersoon",
+  email: "E-mailadres",
+  gemeente: "Gemeente / Regio",
+  groep: "Groep / leerjaar",
+  aantal_leerlingen: "Aantal leerlingen",
+
+  workshop: "Workshopnaam",
+  aanbieder: "Aanbieder",
+  aantal: "Lesmomenten",
+  datum: "Definitieve datum", // bron voor kalender (mag meerdere regels bevatten)
+  locatie: "Locatie",
+  type: "Type", // optioneel
+
+  totale_kosten: "Totale kosten aanbieder",
+
+  status: "Status",
+  lastContact: "Laatste contactdatum",
+  actieNodig: "Actie nodig", // optioneel
+
+  conceptType: "Email Concept type",
+  conceptMadeAt: "Email aangemaakt op",
+  draftId: "Email Concept ID",
+
+  notes: "Notities",
+  debug: "Debug info",
+
+  calendarEventIds: "Calendar Event IDs",
+};
+
+// Welke keys mogen ontbreken zonder dat het script faalt?
+const OPTIONAL_COL_KEYS = new Set(["actieNodig", "type"]);
+
+// runtime map: key -> colIndex
+let COL = {};
+
+/**
+ * =========================================
+ * TRIGGER: onOpen (Add menu-item to authorize)
+ * =========================================
+ */
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu("Techles Admin")
+    // .addItem("Authorize Gmail API", "AUTH_GMAILAPI")
+    .addItem("Authorize GMAIL", "authorizeGmail_")
+    .addItem("Test Gmail signature (active row)", "TEST_GMAILAPI_readSignatureForMe")
+    .addToUi();
+}
+
+function AUTH_GMAILAPI() {
+  // minimale call die Gmail scope vereist -> triggert autorisatie flow
+  Gmail.Users.getProfile(getSendAsIdFromSettings_());
+  SpreadsheetApp.getUi().alert("✅ Gmail API autorisatie lijkt gelukt. Je kunt nu de test runnen.");
+}
+
+function authorizeGmail_() {
+  const result = Gmail.Users.Settings.SendAs.list('me');
+  console.log(result.sendAs || []);
+}
+
+
+/**
+ * =========================================
+ * TRIGGER: handleEdit (installable trigger aanbevolen)
+ * Voeg deze ook toe bij Triggers (in de sidebar) met de waarde "head" en "on edit"
+ * =========================================
+ */
+function handleEdit(e) {
+  const sheet = e.range.getSheet();
+  if (sheet.getName() !== SHEET_MAIN) return;
+
+  initCols_(sheet);
+
+  const row = e.range.getRow();
+  if (row < 2) return; // header
+
+  const editedCol = e.range.getColumn();
+
+  // ✅ Luister naar Definitieve datum, maar alleen als status al Bevestiging is
+  if (editedCol === COL.datum) {
+    const statusNow = String(sheet.getRange(row, COL.status).getValue() || "").trim();
+    if (statusNow === "Bevestiging" || statusNow === "Akkoord") {
+      syncCalendarForRow_(sheet, row);
+    }
+    return;
+  }
+
+  // Alleen reageren als Status is aangepast
+  if (editedCol !== COL.status) return;
+
+  const statusValue = String(e.range.getValue() || "").trim();
+
+  // Reset via Status
+  if (ENABLE_RESET_STATUS && statusValue === RESET_STATUS_VALUE) {
+    resetRow_(sheet, row);
+    e.range.setValue("");
+    return;
+  }
+
+  const templateKey = STATUS_TO_TEMPLATE[statusValue];
+  if (!templateKey) return;
+
+  // ✅ Conceptmail aanmaken bij statuswijziging
+  // - als er nog geen draftId is => maken
+  // - als templateKey verschilt van conceptType => nieuwe draft maken
+  // - als draft bestaat en templateKey gelijk is => overslaan (als DONT_DUPLICATE_IF_DRAFT_EXISTS = true)
+  const existingDraftId = String(sheet.getRange(row, COL.draftId).getValue() || "").trim();
+  const existingType = String(sheet.getRange(row, COL.conceptType).getValue() || "").trim();
+
+  const shouldCreateDraft =
+    !existingDraftId || existingType !== templateKey || !DONT_DUPLICATE_IF_DRAFT_EXISTS;
+
+  if (shouldCreateDraft) {
+    createDraftFromSheetTemplate_(row, templateKey);
+  }
+
+  // ✅ Kalender bij bevestiging: altijd syncen
+  if (templateKey === "BEVESTIGING") {
+    syncCalendarForRow_(sheet, row);
+  }
+}
+
+/**
+ * =========================================
+ * Gmail: Draft + logging + label
+ * =========================================
+ */
+function createDraftFromSheetTemplate_(row, templateKey) {
+  const ss = SpreadsheetApp.getActive();
+  const main = ss.getSheetByName(SHEET_MAIN);
+  const settings = ss.getSheetByName(SHEET_SETTINGS);
+
+  initCols_(main);
+
+  const email = String(main.getRange(row, COL.email).getValue() || "").trim();
+  if (!email) {
+    debug_(main, row, "Geen conceptmail gemaakt: E-mailadres is leeg.");
+    return;
+  }
+  
+  const providerName = String(main.getRange(row, COL.aanbieder).getValue() || "").trim()
+  const provider = getProviderInfoByName_(providerName) || {};
+  if (providerName && !provider.name) {
+    debug_(main, row, "Aanbieder niet gevonden in '" + SHEET_PROVIDERS + "': " + providerName);
+  }
+
+  const totaleKosten = String(main.getRange(row, COL.totale_kosten).getValue() || "");
+
+  const tpl = getTemplateByKey_(settings, templateKey);
+  if (!tpl) {
+    throw new Error(
+      "TemplateKey '" +
+        templateKey +
+        "' niet gevonden in '" +
+        SHEET_SETTINGS +
+        "' (kolom D, vanaf rij " +
+        SETTINGS_START_ROW +
+        ")."
+    );
+  }
+
+  const data = {
+    "{{AANVRAAG_ID}}": String(main.getRange(row, COL.aanvraagId).getValue() || ""),
+    "{{SCHOOL}}": String(main.getRange(row, COL.school).getValue() || ""),
+    "{{NAAM}}": String(main.getRange(row, COL.contact).getValue() || ""),
+    "{{EMAIL}}": String(email || ""),
+    "{{GEMEENTE}}": String(main.getRange(row, COL.gemeente).getValue() || ""),
+    "{{WORKSHOP}}": String(main.getRange(row, COL.workshop).getValue() || ""),
+    "{{AANBIEDER}}": providerName,
+    "{{AANBIEDER_CONTACT}}": provider.contact || "",
+    "{{AANBIEDER_EMAIL}}": provider.email || "",
+    "{{AANBIEDER_TELEFOON}}": provider.phone || "",
+    "{{GROEP}}": String(main.getRange(row, COL.groep).getValue() || ""),
+    "{{AANTAL_LEERLINGEN}}": String(main.getRange(row, COL.aantal_leerlingen).getValue() || ""),
+    "{{AANTAL}}": String(main.getRange(row, COL.aantal).getValue() || ""),
+    "{{DATUM}}": formatDate_(main.getRange(row, COL.datum).getValue()),
+    "{{PRETTY_DATUM}}": formatWorkshopDatesGrouped_(main.getRange(row, COL.datum).getValue()),
+    "{{LOCATIE}}": String(main.getRange(row, COL.locatie).getValue() || ""),
+    "{{TOTALE_KOSTEN}}": formatNumberNl_(totaleKosten),
+  };
+
+  const subject = replaceAll_(tpl.subject, data);
+  const bodyText = replaceAll_(tpl.body, data);
+  let bodyHtml = textToHtml_(bodyText);
+
+  // Signature ophalen
+  const sigHtml = getGmailSignatureHtmlFromSettings_();
+  bodyHtml = appendSignatureHtml_(bodyHtml, sigHtml);
+
+  // Target email
+  const emailTarget =
+    tpl.emailTarget === "School"
+      ? String(main.getRange(row, COL.email).getValue() || "").trim()
+      : tpl.emailTarget === "Aanbieder"
+      ? String(provider.email || "").trim()
+      : "";
+
+  const draft = GmailApp.createDraft(emailTarget, subject, bodyText, { htmlBody: bodyHtml });
+
+  // ✅ Loggen
+  const now = new Date();
+  main.getRange(row, COL.conceptType).setValue(templateKey);
+  main.getRange(row, COL.conceptMadeAt).setValue(now);
+  main.getRange(row, COL.draftId).setValue(draft.getId());
+  main.getRange(row, COL.lastContact).setValue(now);
+  SpreadsheetApp.flush();
+
+  // 🏷️ Labelen (op thread)
+  try {
+    if (tpl.label) {
+      const label = getOrCreateLabel_(tpl.label);
+      draft.getMessage().getThread().addLabel(label);
+    }
+  } catch (err) {
+    debug_(main, row, "Label-fout: " + (err && err.message ? err.message : err));
+  }
+}
+
+/**
+ * =========================================
+ * Calendar helpers: sync + delete
+ * =========================================
+ */
+function syncCalendarForRow_(main, row) {
+  initCols_(main);
+  deleteCalendarEventsForRow_(main, row);
+  main.getRange(row, COL.calendarEventIds).clearContent();
+  SpreadsheetApp.flush();
+  createCalendarEventsForRow_(main, row);
+}
+
+function deleteCalendarEventsForRow_(main, row) {
+  initCols_(main);
+
+  const idsRaw = String(main.getRange(row, COL.calendarEventIds).getValue() || "").trim();
+  if (!idsRaw) return;
+
+  const calendar = CalendarApp.getCalendarById(CALENDAR_ID);
+  if (!calendar) throw new Error("Calendar niet gevonden. Check CALENDAR_ID.");
+
+  const ids = idsRaw.split(",").map((s) => s.trim()).filter(Boolean);
+  for (const id of ids) {
+    try {
+      const ev = calendar.getEventById(id);
+      if (ev) ev.deleteEvent();
+    } catch (err) {
+      debug_(main, row, "Calendar-delete waarschuwing (eventId " + id + "): " + (err && err.message ? err.message : err));
+    }
+  }
+}
+
+/**
+ * =========================================
+ * Calendar: events maken vanuit Definitieve datum
+ * =========================================
+ * Formaat per regel in cel 'Definitieve datum':
+ * dd-mm-jjjj HH:MM-HH:MM
+ */
+function createCalendarEventsForRow_(main, row) {
+  initCols_(main);
+
+  // (optioneel) start clean
+  clearDebug_(main, row);
+
+  // Voorkom dubbel aanmaken
+  const existing = String(main.getRange(row, COL.calendarEventIds).getValue() || "").trim();
+  if (existing) return;
+
+  const calendar = CalendarApp.getCalendarById(CALENDAR_ID);
+  if (!calendar) throw new Error("Calendar niet gevonden. Check CALENDAR_ID.");
+
+  const providerName = String(main.getRange(row, COL.aanbieder).getValue() || "").trim()
+  const provider = getProviderInfoByName_(providerName) || {};
+  if (providerName && !provider.name) {
+    debug_(main, row, "Aanbieder niet gevonden in '" + SHEET_PROVIDERS + "': " + providerName);
+  }
+
+  const school = String(main.getRange(row, COL.school).getValue() || "");
+  const aantal_leerlingen = String(main.getRange(row, COL.aantal_leerlingen).getValue() || "");
+  const groep = String(main.getRange(row, COL.groep).getValue() || "");
+  const workshop = String(main.getRange(row, COL.workshop).getValue() || "");
+  const locatie = String(main.getRange(row, COL.locatie).getValue() || "");
+  const type = COL.type ? String(main.getRange(row, COL.type).getValue() || "") : "";
+  const contact = String(main.getRange(row, COL.contact).getValue() || "");
+  const email = String(main.getRange(row, COL.email).getValue() || "");
+
+
+  const momentsRaw = String(main.getRange(row, COL.datum).getValue() || "").trim();
+  if (!momentsRaw) {
+    debug_(main, row, "Geen kalender-event gemaakt: 'Definitieve datum' is leeg.");
+    return;
+  }
+
+  const lines = momentsRaw
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .split(/\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  const createdIds = [];
+
+  for (const line of lines) {
+    const m = line.match(
+      /^(\d{1,2})-(\d{1,2})-(\d{4})\s+(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/
+    );
+    if (!m) {
+      debug_(main, row, 'Ongeldig formaat in Definitieve datum: "' + line + '" (gebruik dd-mm-jjjj HH:MM-HH:MM)');
+      continue;
+    }
+
+    const day = parseInt(m[1], 10);
+    const month = parseInt(m[2], 10) - 1;
+    const year = parseInt(m[3], 10);
+    const sh = parseInt(m[4], 10);
+    const sm = parseInt(m[5], 10);
+    const eh = parseInt(m[6], 10);
+    const em = parseInt(m[7], 10);
+
+    const start = new Date(year, month, day, sh, sm, 0);
+    const end = new Date(year, month, day, eh, em, 0);
+
+    // ✅ Type toegevoegd
+    const title = "Workshop: " + workshop + " — " + school + (type ? " [" + type + "]" : "");
+    const description =
+      "Aanbieder: " + providerName + "\n" +
+      (provider.email ? `Aanbieder email: ${provider.email}\n` : "") +
+      "Contact school: " + contact + " (" + email + ")\n" +
+      "Groep: " + groep + " - " + aantal_leerlingen + " leerlingen\n" +
+      "Locatie: " + locatie + "\n" +
+      (type ? "Type: " + type + "\n" : "");
+
+    const event = calendar.createEvent(title, start, end, {
+      location: locatie,
+      description: description,
+    });
+
+    createdIds.push(event.getId());
+  }
+
+  if (!createdIds.length) {
+    debug_(main, row, "Geen kalender-event gemaakt: geen geldige regels in 'Definitieve datum'.");
+    return;
+  }
+
+  main.getRange(row, COL.calendarEventIds).setValue(createdIds.join(","));
+}
+
+/**
+ * =========================================
+ * Signature helper
+ * =========================================
+ */
+function getSendAsIdFromSettings_() {
+  const ss = SpreadsheetApp.getActive();
+  const settings = ss.getSheetByName(SHEET_SETTINGS);
+  const v = String(settings.getRange(SETTINGS_SIGNATURE_SENDAS_CELL).getValue() || "").trim();
+  return v || "me";
+}
+
+function getGmailSignatureHtmlFromSettings_() {
+  const userId = "me";
+  const desired = String(getSendAsIdFromSettings_() || "").trim(); // liefst emailadres
+
+  const list = Gmail.Users.Settings.SendAs.list(userId);
+  const items = (list && list.sendAs) ? list.sendAs : [];
+
+  // 1) als B3 matcht met een bestaande sendAsEmail -> gebruik die
+  let chosen = items.find(x => x.sendAsEmail === desired);
+
+  // 2) als B3 leeg of "me" of geen match -> pak de primary
+  if (!chosen) chosen = items.find(x => x.isPrimary) || items[0];
+
+  return (chosen && chosen.signature) ? String(chosen.signature) : "";
+}
+
+
+function appendSignatureHtml_(htmlBody, signatureHtml) {
+  const body = String(htmlBody || "");
+  const sig = String(signatureHtml || "").trim();
+  if (!sig) return body;
+  if (body.includes(sig)) return body; // voorkom dubbel
+
+  return body + "\n<br>\n" + sig;
+}
+
+/**
+ * =========================================
+ * Reset helper
+ * =========================================
+ */
+function resetRow_(sheet, row) {
+  initCols_(sheet);
+
+  // Events uit kalender verwijderen
+  deleteCalendarEventsForRow_(sheet, row);
+
+  sheet.getRange(row, COL.conceptType).clearContent();
+  sheet.getRange(row, COL.conceptMadeAt).clearContent();
+  sheet.getRange(row, COL.draftId).clearContent();
+  sheet.getRange(row, COL.lastContact).clearContent();
+  sheet.getRange(row, COL.calendarEventIds).clearContent();
+}
+
+/**
+ * =========================================
+ * Templates from Instellingen (D/E/F/G/H)
+ * =========================================
+ */
+function getTemplateByKey_(settingsSheet, templateKey) {
+  const lastRow = settingsSheet.getLastRow();
+  if (lastRow < SETTINGS_START_ROW) return null;
+
+  const numRows = lastRow - SETTINGS_START_ROW + 1;
+  const values = settingsSheet.getRange(SETTINGS_START_ROW, SETTINGS_COL.key, numRows, 5).getValues();
+
+  for (const r of values) {
+    const key = String(r[0] || "").trim();
+    if (key === templateKey) {
+      return {
+        subject: String(r[1] || ""),
+        body: String(r[2] || ""),
+        label: String(r[3] || "").trim(),
+        emailTarget: String(r[4] || "").trim(),
+      };
+    }
+  }
+  return null;
+}
+
+/**
+ * =========================================
+ * Column sync (headers -> COL indices)
+ * =========================================
+ */
+function normalizeHeader_(h) {
+  return String(h || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function initCols_(sheet) {
+  const lastCol = sheet.getLastColumn();
+  const rawHeaders = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+
+  const headerToIndex = {};
+  rawHeaders.forEach((h, i) => {
+    const norm = normalizeHeader_(h);
+    if (norm && !headerToIndex[norm]) headerToIndex[norm] = i + 1;
+  });
+
+  const missing = [];
+  const map = {};
+
+  for (const key in COL_HEADERS) {
+    const expectedNorm = normalizeHeader_(COL_HEADERS[key]);
+    const idx = headerToIndex[expectedNorm];
+
+    if (!idx) {
+      if (!OPTIONAL_COL_KEYS.has(key)) missing.push(COL_HEADERS[key]);
+      map[key] = null;
+      continue;
+    }
+    map[key] = idx;
+  }
+
+  if (missing.length) {
+    throw new Error(
+      "Deze headers ontbreken (na normalisatie) in rij 1 van '" +
+        sheet.getName() +
+        "':\n- " +
+        missing.join("\n- ")
+    );
+  }
+
+  COL = map;
+  return COL;
+}
+
+/**
+ * =========================================
+ * Health checks + test helpers
+ * =========================================
+ */
+function HEALTHCHECK_all() {
+  const ss = SpreadsheetApp.getActive();
+  const main = ss.getSheetByName(SHEET_MAIN);
+  const settings = ss.getSheetByName(SHEET_SETTINGS);
+
+  if (!main) throw new Error("Sheet '" + SHEET_MAIN + "' niet gevonden.");
+  if (!settings) throw new Error("Sheet '" + SHEET_SETTINGS + "' niet gevonden.");
+
+  initCols_(main);
+
+  const keysToCheck = ["AFSTEMMING", "VOORSTEL", "BEVESTIGING", "AKKOORD"];
+  const missingTpl = keysToCheck.filter((k) => !getTemplateByKey_(settings, k));
+  if (missingTpl.length) {
+    throw new Error("Templates ontbreken in Instellingen (kolom D): " + missingTpl.join(", "));
+  }
+
+  const cal = CalendarApp.getCalendarById(CALENDAR_ID);
+  if (!cal) throw new Error("Calendar niet gevonden. Check CALENDAR_ID.");
+
+  Logger.log("✅ HEALTHCHECK: headers, templates en calendar zijn aanwezig.");
+}
+
+function TEST_makeCalendarEventsForActiveRow() {
+  const ss = SpreadsheetApp.getActive();
+  const main = ss.getSheetByName(SHEET_MAIN);
+  initCols_(main);
+
+  const row = main.getActiveRange().getRow();
+  if (row < 2) throw new Error("Selecteer een datarij (niet header).");
+
+  syncCalendarForRow_(main, row);
+  Logger.log("✅ Calendar sync gedaan voor rij " + row);
+}
+
+function TEST_makeDraftForActiveRow_AFSTEMMING() {
+  const ss = SpreadsheetApp.getActive();
+  const main = ss.getSheetByName(SHEET_MAIN);
+  initCols_(main);
+
+  const row = main.getActiveRange().getRow();
+  if (row < 2) throw new Error("Selecteer een datarij (niet header).");
+
+  createDraftFromSheetTemplate_(row, "AFSTEMMING");
+  Logger.log("✅ Draft gemaakt voor rij " + row);
+}
+
+function TEST_GMAILAPI_readSignatureForMe() {
+  const ss = SpreadsheetApp.getActive();
+  const main = ss.getSheetByName(SHEET_MAIN);
+  initCols_(main);
+
+  const row = main.getActiveRange().getRow();
+  if (row < 2) throw new Error("Selecteer een datarij (niet header).");
+
+  // Test Gmail API: users.settings.sendAs.get
+  const sendAs = Gmail.Users.Settings.SendAs.get("me", Session.getActiveUser().getEmail());
+  const sig = (sendAs && sendAs.signature) ? String(sendAs.signature) : "";
+
+  // Log in debug kolom (of pas aan als jij andere naam gebruikt)
+  if (COL.debug) main.getRange(row, COL.debug).setValue("✅ Gmail API OK. signature length=" + sig.length);
+
+  Logger.log("✅ Gmail API OK. signature length=" + sig.length);
+}
+
+
+/**
+ * =========================================
+ * Utilities
+ * =========================================
+ */
+function getProviderInfoByName_(providerName) {
+  const name = String(providerName || "").trim();
+  if (!name) return null;
+
+  const ss = SpreadsheetApp.getActive();
+  const sh = ss.getSheetByName(SHEET_PROVIDERS);
+  if (!sh) throw new Error("Sheet '" + SHEET_PROVIDERS + "' niet gevonden.");
+
+  // Pas aan als jouw aanbieders-tab anders is:
+  const COLS = { name: 1, contact: 2, email: 3, phone: 4 }; // A/B/C/D
+
+  const lastRow = sh.getLastRow();
+  if (lastRow < 2) return null;
+
+  const values = sh.getRange(2, 1, lastRow - 1, Math.max(COLS.phone, COLS.email, COLS.contact)).getValues();
+
+  for (const r of values) {
+    const n = String(r[COLS.name - 1] || "").trim();
+    if (n.toLowerCase() === name.toLowerCase()) {
+      return {
+        name: n,
+        contact: String(r[COLS.contact - 1] || "").trim(),
+        email: String(r[COLS.email - 1] || "").trim(),
+        phone: String(r[COLS.phone - 1] || "").trim(),
+      };
+    }
+  }
+  return null;
+}
+
+function getOrCreateLabel_(labelName) {
+  let label = GmailApp.getUserLabelByName(labelName);
+  if (!label) label = GmailApp.createLabel(labelName);
+  return label;
+}
+
+function debug_(sheet, row, message) {
+  initCols_(sheet);
+  if (!COL.debug) return;
+  const existing = String(sheet.getRange(row, COL.debug).getValue() || "");
+  sheet.getRange(row, COL.debug).setValue(existing ? existing + "\n" + message : message);
+}
+
+function clearDebug_(sheet, row) {
+  initCols_(sheet);
+  if (!COL.debug) return;
+  sheet.getRange(row, COL.debug).clearContent();
+}
+
+function replaceAll_(text, map) {
+  let out = String(text || "");
+  Object.keys(map).forEach((k) => (out = out.split(k).join(map[k] ?? "")));
+  return out;
+}
+
+function formatDate_(value) {
+  if (value === null || value === undefined || value === "") return "";
+
+  const tz = Session.getScriptTimeZone();
+
+  // 1) Als het een echte Date is (Sheets date/datetime)
+  if (Object.prototype.toString.call(value) === "[object Date]" && !isNaN(value.getTime())) {
+    // Met tijd als er tijd aanwezig is (niet middernacht)
+    const hasTime = value.getHours() !== 0 || value.getMinutes() !== 0;
+    const fmt = hasTime ? "dd-MM-yyyy HH:mm" : "dd-MM-yyyy";
+    return Utilities.formatDate(value, tz, fmt);
+  }
+
+  // 2) Anders: behandel als tekst (kan multiline zijn)
+  let text = String(value).replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim();
+  if (!text) return "";
+
+  const lines = text.split("\n").map(s => s.trim()).filter(Boolean);
+
+  const out = lines.map(line => {
+    // a) dd-mm-jjjj HH:MM-HH:MM  (we houden tijden zoals ze zijn)
+    let m = line.match(/^(\d{1,2})-(\d{1,2})-(\d{4})(\s+(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2}))$/);
+    if (m) {
+      const dd = String(m[1]).padStart(2, "0");
+      const mm = String(m[2]).padStart(2, "0");
+      const yyyy = m[3];
+      // tijden exact laten staan (maar je kunt hier ook padStart doen als je wil)
+      const rest = m[4]; // inclusief spatie + tijd-range
+      return `${dd}-${mm}-${yyyy}${rest}`;
+    }
+
+    // b) dd-mm-jjjj HH:MM (single time)
+    m = line.match(/^(\d{1,2})-(\d{1,2})-(\d{4})\s+(\d{1,2}):(\d{2})$/);
+    if (m) {
+      const dd = String(m[1]).padStart(2, "0");
+      const mm = String(m[2]).padStart(2, "0");
+      const yyyy = m[3];
+      const hh = String(m[4]).padStart(2, "0");
+      const min = m[5];
+      return `${dd}-${mm}-${yyyy} ${hh}:${min}`;
+    }
+
+    // c) dd-mm-jjjj (alleen datum)
+    m = line.match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/);
+    if (m) {
+      const dd = String(m[1]).padStart(2, "0");
+      const mm = String(m[2]).padStart(2, "0");
+      const yyyy = m[3];
+      return `${dd}-${mm}-${yyyy}`;
+    }
+
+    // d) Fallback: probeer Date parsing (laat originele lijn staan als het niet lukt)
+    const parsed = new Date(line);
+    if (!isNaN(parsed.getTime())) {
+      const fmt = "dd-MM-yyyy HH:mm";
+      return Utilities.formatDate(parsed, tz, fmt);
+    }
+
+    return line; // onbekend formaat: laat staan
+  });
+
+  return out.join("\n");
+}
+
+
+function textToHtml_(text) {
+  if (!text) return "";
+
+  let t = String(text).replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+  const hasHtmlTags = /<\/?[a-z][\s\S]*>/i.test(t);
+
+  if (hasHtmlTags) {
+    t = t.replace(/\n/g, "<br>\n");
+    return `
+      <div style="font-family: Verdana, Arial, sans-serif; font-size: 10pt; line-height: 1.4;">
+        ${t}
+      </div>
+    `;
+  }
+
+  const paragraphs = t
+    .split(/\n\s*\n/)
+    .map(
+      (p) =>
+        `<p style="font-family: Verdana, Arial, sans-serif; font-size: 10pt; line-height: 1.4; margin: 0 0 10px 0;">${p.replace(
+          /\n/g,
+          "<br>\n"
+        )}</p>`
+    )
+    .join("\n");
+
+  return paragraphs;
+}
+
+function formatWorkshopDatesGrouped_(input) {
+  if (!input) return "";
+
+  const text = String(input);
+
+  const re = /(\b\d{1,2})[-\/](\d{1,2})[-\/](\d{4})\b/g;
+
+  const dates = [];
+  let m;
+
+  while ((m = re.exec(text)) !== null) {
+    const day = parseInt(m[1], 10);
+    const month = parseInt(m[2], 10);
+    const year = parseInt(m[3], 10);
+
+    const dt = new Date(year, month - 1, day);
+
+    if (
+      dt.getFullYear() === year &&
+      dt.getMonth() === month - 1 &&
+      dt.getDate() === day
+    ) {
+      dates.push(dt);
+    }
+  }
+
+  if (dates.length === 0) return "";
+
+  // Sorteer chronologisch
+  dates.sort((a, b) => a - b);
+
+  // Deduplicate
+  const unique = [];
+  const seen = new Set();
+  for (const d of dates) {
+    const key = d.toISOString().slice(0, 10);
+    if (!seen.has(key)) {
+      seen.add(key);
+      unique.push(d);
+    }
+  }
+
+  const monthsNl = [
+    "januari", "februari", "maart", "april", "mei", "juni",
+    "juli", "augustus", "september", "oktober", "november", "december"
+  ];
+
+  // Groeperen per maand+jaar
+  const grouped = {};
+
+  unique.forEach(dt => {
+    const key = dt.getFullYear() + "-" + dt.getMonth();
+    if (!grouped[key]) {
+      grouped[key] = {
+        year: dt.getFullYear(),
+        month: dt.getMonth(),
+        days: []
+      };
+    }
+    grouped[key].days.push(dt.getDate());
+  });
+
+  const parts = Object.values(grouped).map(group => {
+    const daysText = joinNl_(group.days.map(String));
+    const monthName = monthsNl[group.month];
+    return `${daysText} ${monthName}`;
+  });
+
+  return joinNl_(parts);
+}
+
+function joinNl_(parts) {
+  if (parts.length === 1) return parts[0];
+  if (parts.length === 2) return `${parts[0]} en ${parts[1]}`;
+  return `${parts.slice(0, -1).join(", ")} en ${parts[parts.length - 1]}`;
+}
+
+function formatNumberNl_(value, decimals = 2) {
+  if (value === null || value === "" || value === undefined) return "";
+  const num = coerceToNumber_(value);
+  if (num === null) return String(value);
+
+  return new Intl.NumberFormat("nl-NL", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  }).format(num);
+}
+
+function coerceToNumber_(value) {
+  if (typeof value === "number") return value;
+
+  if (typeof value === "string") {
+    let s = value.trim();
+    if (!s) return null;
+
+    // haal € en spaties weg
+    s = s.replace(/€/g, "").replace(/\s/g, "");
+
+    // Als het NL-notatie is: 1.234,56 -> 1234.56
+    // Als het EN-notatie is: 1234.56 blijft 1234.56
+    // Heuristiek: als er een komma in zit, is komma decimal en punten duizendtallen
+    if (s.includes(",")) {
+      s = s.replace(/\./g, "").replace(",", ".");
+    }
+
+    const num = Number(s);
+    return Number.isFinite(num) ? num : null;
+  }
+
+  return null;
+}
+
